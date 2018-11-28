@@ -57,7 +57,7 @@ public enum TradeStateFilter : String, Codable {
 
 /// The specification of a Trade within an Account.
 /// This includes the full representation of the Trade’s dependent Orders in addition to the IDs of those Orders.
-struct TradeSummary: Codable {
+struct Trade: Codable {
 
 	/// The Trade’s identifier, unique within the Trade’s Account.
 	public let id : Int
@@ -98,5 +98,21 @@ struct TradeSummary: Codable {
 	/// Only present if the Trade has been closed or reduced at least once.
 	public let averageClosePrice : PriceValue
 
+	/// The IDs of the Transactions that have closed portions of this Trade
 	public let closingTransactionIDs : [TransactionID]
+
+	/// The financing paid/collected for this Trade.
+	public let financing : AccountUnits
+
+	/// The date/time when the Trade was fully closed.
+	/// Only provided for Trades whose state is CLOSED.
+	public let closeTime : DateTime
+
+	/// The client extensions of the Trade.
+	public let clientExtensions : ClientExtensions
+
+	/// Full representation of the Trade’s Take Profit Order, only provided if such an Order exists.
+	public let takeProfitOrder : TakeProfitOrder
+
+
 }

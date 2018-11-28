@@ -20,15 +20,6 @@ enum EndpointsURL {
 	case accounts
 }
 
-enum StopLossOrderMode: String, Codable {
-
-	case disable = "DISABLED"
-	case allowed = "ALLOWED"
-	case required = "REQUIRED"
-
-}
-
-
 /// You can use this structure for all oanda infomation
 public struct Oanda {
 
