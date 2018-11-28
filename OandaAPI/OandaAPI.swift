@@ -30,16 +30,15 @@ enum StopLossOrderMode: String, Codable {
 
 
 /// You can use this structure for all oanda infomation
-struct Oanda {
+public struct Oanda {
 
-	var account = ""
 
 	private let domain = "api-fxpractice.oanda.com"
 	private let main : String
 	private let version = "v3/"
 	private let accounts = "accounts"
 
-	let mainSpace : URLProtectionSpace
+	public let mainSpace : URLProtectionSpace
 
 	init() {
 

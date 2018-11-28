@@ -8,12 +8,12 @@
 
 import Foundation
 
-class TradingController: NSObject, URLSessionDelegate {
+open class TradingController: NSObject, URLSessionDelegate {
 
 	let session = URLSession(configuration: .default)
-	let oandaURLS = Oanda()
+	public let oandaURLS = Oanda()
 
-	func checkAccounts(bearer token: String, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
+	public func checkAccounts(bearer token: String, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
 
 		var request = URLRequest(url: oandaURLS.endpoint(url: .accounts))
 
@@ -43,4 +43,3 @@ class TradingController: NSObject, URLSessionDelegate {
 	}
 	
 }
-
