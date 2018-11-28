@@ -10,6 +10,10 @@
 		EDFE8F4421AE134B0097A075 /* OandaAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F3A21AE134B0097A075 /* OandaAPI.framework */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
 		EDFE8F4B21AE134B0097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F3D21AE134B0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EDFE8F5821AE13790097A075 /* OandaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5421AE13790097A075 /* OandaAPI.swift */; };
+		EDFE8F5921AE13790097A075 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5521AE13790097A075 /* Account.swift */; };
+		EDFE8F5A21AE13790097A075 /* TradingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5621AE13790097A075 /* TradingController.swift */; };
+		EDFE8F5B21AE13790097A075 /* Trading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5721AE13790097A075 /* Trading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,10 @@
 		EDFE8F4321AE134B0097A075 /* OandaAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OandaAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OandaAPITests.swift; sourceTree = "<group>"; };
 		EDFE8F4A21AE134B0097A075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDFE8F5421AE13790097A075 /* OandaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OandaAPI.swift; sourceTree = "<group>"; };
+		EDFE8F5521AE13790097A075 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		EDFE8F5621AE13790097A075 /* TradingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingController.swift; sourceTree = "<group>"; };
+		EDFE8F5721AE13790097A075 /* Trading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trading.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +79,12 @@
 		EDFE8F3C21AE134B0097A075 /* OandaAPI */ = {
 			isa = PBXGroup;
 			children = (
-				EDFE8F3D21AE134B0097A075 /* OandaAPI.h */,
 				EDFE8F3E21AE134B0097A075 /* Info.plist */,
+				EDFE8F3D21AE134B0097A075 /* OandaAPI.h */,
+				EDFE8F5521AE13790097A075 /* Account.swift */,
+				EDFE8F5421AE13790097A075 /* OandaAPI.swift */,
+				EDFE8F5721AE13790097A075 /* Trading.swift */,
+				EDFE8F5621AE13790097A075 /* TradingController.swift */,
 			);
 			path = OandaAPI;
 			sourceTree = "<group>";
@@ -148,6 +160,7 @@
 				TargetAttributes = {
 					EDFE8F3921AE134B0097A075 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					EDFE8F4221AE134B0097A075 = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDFE8F5821AE13790097A075 /* OandaAPI.swift in Sources */,
+				EDFE8F5B21AE13790097A075 /* Trading.swift in Sources */,
+				EDFE8F5921AE13790097A075 /* Account.swift in Sources */,
+				EDFE8F5A21AE13790097A075 /* TradingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +357,7 @@
 		EDFE8F4F21AE134B0097A075 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -359,6 +377,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -366,6 +385,7 @@
 		EDFE8F5021AE134B0097A075 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -392,6 +412,7 @@
 		EDFE8F5221AE134B0097A075 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Z8Q82L44LS;
@@ -410,6 +431,7 @@
 		EDFE8F5321AE134B0097A075 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Z8Q82L44LS;
