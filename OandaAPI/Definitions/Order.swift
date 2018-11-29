@@ -51,7 +51,7 @@ public protocol OrderBase {
 
 }
 
-struct TakeProfitOrder : OrderBase {
+struct TakeProfitOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
@@ -67,6 +67,8 @@ struct TakeProfitOrder : OrderBase {
 
 	
 }
+
+
 
 
 // MARK: Order-related Definitions
@@ -108,4 +110,39 @@ public enum OrderState : String, Codable {
 	case filled = "FILLED"
 	case triggered = "TRIGGERED"
 	case cancelled = "CANCELLED"
+}
+
+/// Representation of many units of an Instrument are available to be traded for both long and short Orders.
+public struct UnitsAvailableDetails: Codable {
+
+	/// The units available for long Orders.
+	public let long : DecimalNumber
+
+	/// The units available for short Orders.
+	public let short : DecimalNumber
+}
+
+/// Representation of how many units of an Instrument are available to be traded by an Order depending on its postionFill option.
+public struct UnitsAvailable: Codable {
+
+	/// The number of units that are available to be traded using an Order with a positionFill option of “DEFAULT”.
+	/// For an Account with hedging enabled, this value will be the same as the “OPEN_ONLY” value.
+	/// For an Account without hedging enabled, this value will be the same as the “REDUCE_FIRST” value.
+	public let defaultUnits : UnitsAvailableDetails
+
+	/// The number of units that may are available to be traded with an Order with a positionFill option of “REDUCE_FIRST”.
+	public let reduceFirst : UnitsAvailableDetails
+
+	/// The number of units that may are available to be traded with an Order with a positionFill option of “REDUCE_ONLY”.
+	public let reduceOnly : UnitsAvailableDetails
+
+	/// The number of units that may are available to be traded with an Order with a positionFill option of “OPEN_ONLY”.
+	public let openOnly : UnitsAvailableDetails
+
+	enum CodingKeys: String, CodingKey {
+		case defaultUnits = "default"
+		case reduceFirst
+		case reduceOnly
+		case openOnly
+	}
 }

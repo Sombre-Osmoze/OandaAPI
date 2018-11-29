@@ -38,6 +38,10 @@ public enum TradeState : String, Codable {
 }
 
 
+/// The identification of a Trade as referred to by clients
+/// Either the Trade’s OANDA-assigned TradeID or the Trade’s client-provided ClientID prefixed by the “@” symbol
+public typealias TradeSpecifier = String
+
 
 /// The state to filter the Trades by
 ///
@@ -51,8 +55,6 @@ public enum TradeStateFilter : String, Codable {
 	case closeWhenTradeable = "CLOSE_WHEN_TRADEABLE"
 	case all = "ALL"
 }
-
-
 
 
 /// The specification of a Trade within an Account.
@@ -114,5 +116,32 @@ struct Trade: Codable {
 	/// Full representation of the Trade’s Take Profit Order, only provided if such an Order exists.
 	public let takeProfitOrder : TakeProfitOrder
 
+	public let stopLossOrder : StopLossOrder
 
+}
+
+
+
+/// The dynamic (calculated) state of an open Trade
+public struct CalculatedTradeState: Codable {
+
+	/// The Trade’s ID.
+	public let id : TradeID
+
+	/// The Trade’s unrealized profit/loss.
+	public let unrealizedPL : AccountUnits
+
+	/// Margin currently used by the Trade.
+	public let marginUsed : AccountUnits
+}
+
+/// The classification of TradePLs.
+///
+/// - positive: An open Trade currently has a positive (profitable) unrealized P/L, or a closed Trade realized a positive amount of P/L.
+/// - negative: An open Trade currently has a negative (losing) unrealized P/L, or a closed Trade realized a negative amount of P/L.
+/// - zero: An open Trade currently has unrealized P/L of zero (neither profitable nor losing), or a closed Trade realized a P/L amount of zero.
+public enum TradePL: String, Codable {
+	case positive = "POSITIVE"
+	case negative = "NEGATIVE"
+	case zero = "ZERO"
 }

@@ -11,7 +11,7 @@ import Foundation
 // MARK: Position Definitions
 
 /// The specification of a Position within an Account.
-public struct Positon: Codable {
+public struct Position: Codable {
 
 	/// The Position’s Instrument.
 	public let instrument : InstrumentName
