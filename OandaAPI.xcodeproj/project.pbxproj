@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED94F8E021B3CB700011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
+		ED94F8E121B3CB790011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
 		EDFE8F8921AE27950097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDFE8F9721AE281F0097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -70,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED94F8DF21B3CB5C0011F912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDFE8F3E21AE134B0097A075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFE8F4321AE134B0097A075 /* OandaAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OandaAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OandaAPITests.swift; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 		EDFE8F3021AE134B0097A075 = {
 			isa = PBXGroup;
 			children = (
+				ED94F8DF21B3CB5C0011F912 /* README.md */,
 				EDFE8F3C21AE134B0097A075 /* OandaAPI */,
 				EDFE8F4721AE134B0097A075 /* OandaAPITests */,
 				EDFE8FC821AF1CF20097A075 /* DefinitionsTests */,
@@ -360,6 +364,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED94F8E121B3CB790011F912 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED94F8E021B3CB700011F912 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
