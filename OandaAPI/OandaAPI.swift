@@ -9,51 +9,95 @@
 import Foundation
 
 
-/// This enumeration describe each endpoints of Oanda's v20 REST API
-///
-/// - main: The main URL
-/// - version: The Api version
-/// - accounts: The endpoint to fetch all of the account related to a token
-enum EndpointsURL {
-	case main
-	case version
-	case accounts
-}
-
 /// You can use this structure for all oanda infomation
 public struct Oanda {
 
+	/// If it's demo account or not
+	public let isPractice : Bool
 
-	private let domain = "api-fxpractice.oanda.com"
-	private let main : String
+	/// The current account id
+	public let account : AccountID
+
+	/// This enumeration describe each endpoints of Oanda's v20 REST API
+	///
+	/// - main: The main URL
+	/// - version: The Api version
+	/// - accounts: The endpoint to fetch all of the account related to a token
+	/// - pricing: The endpoint to fetch all of the pricing of instruments
+	enum EndpointsURL {
+		case main
+		case version
+		case accounts
+		case pricing
+	}
+
+	/// The rest "URLProtectionSpace"
+	public let restSpace : URLProtectionSpace
+
+	/// The stream "URLProtectionSpace"
+	public let streamSpace : URLProtectionSpace
+
+	private let rest = "api-fxtrade.oanda.com"
+	private	let stream = "stream-fxtrade.oanda.com"
+	private let restPractice = "api-fxpractice.oanda.com"
+	private let streamPractice = "stream-fxpractice.oanda.com"
+
 	private let version = "v3/"
-	private let accounts = "accounts"
+	private let accounts = "accounts/"
+	private let pricing = "pricing"
 
-	public let mainSpace : URLProtectionSpace
+	/// This function initialse the object
+	///
+	/// - Parameters:
+	///   - id: The id of the account
+	///   - demo: If the account is a practice one set true
+	init(with id: AccountID, is demo: Bool) {
+		account = id
+		if demo {
+			restSpace = .init(host: restPractice, port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault)
+			streamSpace = .init(host: streamPractice, port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault)
+		} else {
+			restSpace = .init(host: rest, port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault)
+			streamSpace = .init(host: stream, port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault)
+		}
+		isPractice = demo
+	}
 
-	init() {
 
-		main = "https://" + domain + "/"
-		mainSpace = .init(host: domain, port: 443, protocol: "https", realm: nil, authenticationMethod: nil)
+	func main(_ stream: Bool) -> String {
+		if stream {
+			return "https://" + (isPractice ? streamPractice : self.stream) + "/"
+		}
+		return "https://" + (isPractice ? restPractice : rest) + "/"
 	}
 
 	func endpoint(url type: EndpointsURL) -> URL {
 
 		switch type {
-
 		case .main:
-			return URL(string: main + version + accounts)!
+			return URL(string: main(false))!
 		case .version:
-			return URL(string: main + version)!
+			return URL(string: main(false) + version)!
 		case .accounts:
-			return URL(string: main + version + accounts)!
+			return URL(string: main(false) + version + accounts)!
+		case .pricing:
+			return URL(string: main(false) + version + accounts + account + "/" + pricing)!
 		}
 	}
 
-	public static func dateFormat() -> DateFormatter {
-		let format = DateFormatter()
-		format.dateFormat = "YYYY-MM-DDT23:59:60Z"
-		return format
+	func endpointStream(url type: EndpointsURL) -> URL {
+
+		switch type {
+		case .pricing:
+			return URL(string: main(true) + version + accounts + account + "/" + pricing)!
+		default:
+			fatalError()
+		}
 	}
 
+	public static func dateFormat() -> ISO8601DateFormatter {
+		let format = ISO8601DateFormatter()
+		format.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+		return format
+	}
 }

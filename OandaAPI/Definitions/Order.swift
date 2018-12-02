@@ -49,8 +49,14 @@ public protocol OrderBase {
 	/// The type of the Order.
 	var type : OrderType { get }
 
+	/// The ID of the Trade to close when the price threshold is breached.
+	var tradeID : TradeID { get }
+
 }
 
+/// A TakeProfitOrder is an order that is linked to an open Trade and created with a price threshold.
+/// The Order will be filled (closing the Trade) by the first price that is equal to or better than the threshold.
+/// A TakeProfitOrder cannot be used to open a new Position.
 struct TakeProfitOrder : Codable, OrderBase {
 
 	public let id : OrderID
@@ -65,11 +71,26 @@ struct TakeProfitOrder : Codable, OrderBase {
 	/// Always set to “TAKE_PROFIT” for Take Profit
 	public let type : OrderType = .takeProfit
 
-	
+	public let tradeID : TradeID
 }
 
+/// A StopLossOrder is an order that is linked to an open Trade and created with a price threshold. The Order will be filled (closing the Trade) by the first price that is equal to or worse than the threshold. A StopLossOrder cannot be used to open a new Position.
+struct StopLossOrder : Codable, OrderBase {
 
+	public let id : OrderID
 
+	public let createTime : DateTime
+
+	public let state : OrderState
+
+	public let clientExtensions : ClientExtensions
+
+	/// The type of the Order.
+	/// Always set to “STOP_LOSS” for Stop Loss Orders.
+	public let type : OrderType = .stopLoss
+
+	public let tradeID : TradeID
+}
 
 // MARK: Order-related Definitions
 
@@ -110,6 +131,27 @@ public enum OrderState : String, Codable {
 	case filled = "FILLED"
 	case triggered = "TRIGGERED"
 	case cancelled = "CANCELLED"
+}
+
+/// The dynamic state of an Order.
+/// This is only relevant to TrailingStopLoss Orders, as no other Order type has dynamic state.
+public struct DynamicOrderState: Codable {
+
+	/// The Order’s ID.
+	public let id : OrderID
+
+	/// The Order’s calculated trailing stop value.
+	public let trailingStopValue : PriceValue
+
+	/// The distance between the Traialing Stop Loss Order’s trailingStopValue and the current Market Price.
+	/// This represents the distance (in price units) of the Order from a triggering price.
+	/// If the distance could not be determined, this value will not be set.
+	public let triggerDistance : PriceValue
+
+	/// True if an exact trigger distance could be calculated.
+	/// If false, it means the provided trigger distance is a best estimate.
+	/// If the distance could not be determined, this value will not be set.
+	public let isTriggerDistanceExact : Bool
 }
 
 /// Representation of many units of an Instrument are available to be traded for both long and short Orders.

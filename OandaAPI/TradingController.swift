@@ -11,15 +11,29 @@ import Foundation
 open class TradingController: NSObject, URLSessionDelegate {
 
 	let session = URLSession(configuration: .default)
-	public let oandaURLS = Oanda()
+	public let oandaURLS : Oanda
 
-	public func checkAccounts(bearer token: String, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
+	init(with account: AccountID, is practice: Bool) {
+		oandaURLS = .init(with: account, is: practice)
+	}
 
-		var request = URLRequest(url: oandaURLS.endpoint(url: .accounts))
+
+
+
+
+
+
+
+
+
+
+	public class func checkAccounts(bearer token: String, demo: Bool, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
+
+		var request = URLRequest(url: URL(string: "https://stream-fx\(demo ? "practice" : "trade").oanda.com/")!)
 
 		request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
-		session.dataTask(with: request) { (data, response, error) in
+		URLSession.shared.dataTask(with: request) { (data, response, error) in
 
 			if error == nil, data != nil {
 

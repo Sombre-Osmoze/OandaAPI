@@ -121,6 +121,16 @@ struct Trade: Codable {
 }
 
 
+public struct TradeSummary: Codable {
+
+	/// The Trade’s identifier, unique within the Trade’s Account.
+	public let id : TradeID
+
+	/// The Trade’s Instrument.
+	public let instrument : InstrumentName
+}
+
+
 
 /// The dynamic (calculated) state of an open Trade
 public struct CalculatedTradeState: Codable {

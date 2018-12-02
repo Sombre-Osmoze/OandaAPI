@@ -148,6 +148,60 @@ public struct Account : Codable {
 
 }
 
+/// An AccountState Object is used to represent an Account’s current price-dependent state.
+/// Price-dependent Account state is dependent on OANDA’s current Prices, and includes things like unrealized PL, NAV and Trailing Stop Loss Order state.
+struct AccountChangesState: Codable {
+
+	/// The total unrealized profit/loss for all Trades currently open in the Account.
+	public let unrealizedPL : AccountUnits
+
+	/// The net asset value of the Account. Equal to Account balance + unrealizedPL.
+	public let NAV: AccountUnits
+
+	/// Margin currently used for the Account.
+	public let marginUsed : AccountUnits
+
+	/// Margin available for Account currency.
+	public let marginAvailable : AccountUnits
+
+	/// The value of the Account’s open positions represented in the Account’s home currency.
+	public let positionValue : AccountUnits
+
+	///  The Account’s margin closeout unrealized PL.
+	public let marginCloseoutUnrealizedPL : AccountUnits
+
+	/// The Account’s margin closeout NAV.
+	public let marginCloseoutNAV : AccountUnits
+
+	/// The Account’s margin closeout margin used.
+	public let marginCloseoutMarginUsed : AccountUnits
+
+	/// The Account’s margin closeout percentage.
+	/// When this value is 1.0 or above the Account is in a margin closeout situation.
+	public let marginCloseoutPercent : DecimalNumber
+
+	/// The value of the Account’s open positions as used for margin closeout calculations represented in the Account’s home currency.
+	public let marginCloseoutPositionValue : DecimalNumber
+
+	/// The current WithdrawalLimit for the account which will be zero or a positive value indicating how much can be withdrawn from the account.
+	public let withdrawalLimit : AccountUnits
+
+	/// The Account’s margin call margin used.
+	public let marginCallMarginUsed : AccountUnits
+
+	/// The Account’s margin call percentage.
+	/// When this value is 1.0 or above the Account is in a margin call situation.
+	public let marginCallPercent : DecimalNumber
+
+	/// The price-dependent state of each pending Order in the Account.
+	public let orders : [DynamicOrderState]
+
+	/// The price-dependent state for each open Trade in the Account.
+	public let trades : [CalculatedTradeState]
+
+	/// The price-dependent state for each open Position in the Account.
+	public let positions : [CalculatedPositionState]
+}
 
 /// Properties related to an Account.
 struct AccountProperties: Codable {
