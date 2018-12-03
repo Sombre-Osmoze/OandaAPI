@@ -35,7 +35,7 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 
 	public class func checkAccounts(bearer token: String, demo: Bool, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
 
-		var request = URLRequest(url: URL(string: "https://stream-fx\(demo ? "practice" : "trade").oanda.com/")!)
+		var request = URLRequest(url: URL(string: "https://api-fx\(demo ? "practice" : "trade").oanda.com/v3/accounts")!)
 
 		request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
@@ -53,7 +53,9 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 					let accounts = try! JSONDecoder().decode([SubAccount].self, from: parse.data(using: .utf8)!)
 						handler(accounts, error)
 				default:
-					print((response as! HTTPURLResponse).statusCode)
+					print((response as! HTTPURLResponse))
+					print(String(data: data!, encoding: .utf8))
+					// TODO: Create more explicite error
 					handler([], error)
 				}
 			} else {
