@@ -73,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		ED94F8DF21B3CB5C0011F912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		ED94F8E221B3CC8E0011F912 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		EDFE8F3E21AE134B0097A075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFE8F4321AE134B0097A075 /* OandaAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OandaAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OandaAPITests.swift; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				ED94F8DF21B3CB5C0011F912 /* README.md */,
+				ED94F8E221B3CC8E0011F912 /* CODE_OF_CONDUCT.md */,
 				EDFE8F3C21AE134B0097A075 /* OandaAPI */,
 				EDFE8F4721AE134B0097A075 /* OandaAPITests */,
 				EDFE8FC821AF1CF20097A075 /* DefinitionsTests */,
