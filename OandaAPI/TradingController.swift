@@ -14,7 +14,7 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 	public let oandaURLS : Oanda
 	private let credential : URLCredential
 
-	init(with credentials: URLCredential, is practice: Bool) {
+	public init(with credentials: URLCredential, is practice: Bool) {
 		oandaURLS = .init(with: credentials.user!, is: practice)
 		credential = credentials
 		session = .init(configuration: .ephemeral)
@@ -32,6 +32,28 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 		return request
 	}
 
+
+	public func accountSummary() -> Void {
+
+
+		let request = basiqueRequest(with: oandaURLS.endpointAccount(url: .summary), date: .rfc3339)
+
+		session.dataTask(with: request) { (data, response, error) in
+
+			if error == nil, data != nil {
+				let decoder = JSONDecoder()
+				decoder.dateDecodingStrategy = .iso8601
+				//print(String(data: data!, encoding: .utf8))
+
+				do {
+					let summary = try decoder.decode(AccountSummary.self, from: data!)
+					print(summary.lastTransactionID)
+				} catch let (parse) {
+					print(parse)
+				}
+			}
+		}.resume()
+	}
 
 	public class func checkAccounts(bearer token: String, demo: Bool, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
 
@@ -54,7 +76,6 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 						handler(accounts, error)
 				default:
 					print((response as! HTTPURLResponse))
-					print(String(data: data!, encoding: .utf8))
 					// TODO: Create more explicite error
 					handler([], error)
 				}

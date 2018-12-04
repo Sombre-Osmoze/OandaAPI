@@ -29,6 +29,11 @@ public struct Oanda {
 		case version
 		case accounts
 		case pricing
+
+		enum Account {
+			case id
+			case summary
+		}
 	}
 
 	/// The rest "URLProtectionSpace"
@@ -45,6 +50,7 @@ public struct Oanda {
 	private let version = "v3/"
 	private let accounts = "accounts/"
 	private let pricing = "pricing"
+	private let summary = "summary"
 
 	/// This function initialse the object
 	///
@@ -83,6 +89,16 @@ public struct Oanda {
 		case .pricing:
 			return URL(string: main(false) + version + accounts + account + "/" + pricing)!
 		}
+	}
+
+	func endpointAccount(url type: EndpointsURL.Account) -> URL {
+		switch type {
+		case .id:
+			return URL(string: main(false) + version + accounts + account)!
+		case .summary:
+			return URL(string: main(false) + version + accounts + account + "/" + summary)!
+		}
+
 	}
 
 	func endpointStream(url type: EndpointsURL) -> URL {

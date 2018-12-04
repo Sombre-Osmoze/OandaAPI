@@ -18,6 +18,14 @@ public struct SubAccount : Codable {
 	public let tags : [String]
 }
 
+
+public struct AccountSummary: Codable {
+
+	let account : Account
+	let lastTransactionID : TransactionID
+
+}
+
 /// The string representation of an Account Identifier.
 /// “-“-delimited string with format “{siteID}-{divisionID}-{userID}-{accountNumber}”
 public typealias AccountID = String
