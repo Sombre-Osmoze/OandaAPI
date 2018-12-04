@@ -8,11 +8,20 @@
 
 import Foundation
 
+
+public protocol TradingControllerDelegate {
+
+
+}
+
 open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 
 	var session : URLSession
 	public let oandaURLS : Oanda
 	private let credential : URLCredential
+	public var delegate : TradingControllerDelegate? = nil
+
+	private var streamTasks : [URLSessionTask] = []
 
 	public init(with credentials: URLCredential, is practice: Bool) {
 		oandaURLS = .init(with: credentials.user!, is: practice)
@@ -23,33 +32,27 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 	}
 
 	func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
-
 		var request = URLRequest(url: url)
 
 		request.allHTTPHeaderFields = ["Authorization" : "Bearer \(credential.password!)",
 										"Accept-Datetime-Format" : format.rawValue]
-
 		return request
 	}
 
 
-	public func accountSummary() -> Void {
-
-
+	public func accountSummary(completion handler: @escaping(_ summary: AccountSummary?, _ error: Error?) -> Void) -> Void {
 		let request = basiqueRequest(with: oandaURLS.endpointAccount(url: .summary), date: .rfc3339)
 
 		session.dataTask(with: request) { (data, response, error) in
 
 			if error == nil, data != nil {
 				let decoder = JSONDecoder()
-				decoder.dateDecodingStrategy = .iso8601
-				//print(String(data: data!, encoding: .utf8))
-
+				decoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
 				do {
 					let summary = try decoder.decode(AccountSummary.self, from: data!)
-					print(summary.lastTransactionID)
+					handler(summary, nil)
 				} catch let (parse) {
-					print(parse)
+					handler(nil, parse)
 				}
 			}
 		}.resume()
@@ -88,9 +91,16 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 
 	func marketPrice(for instruments: [InstrumentName]) -> Void {
 
-	}
+		let request = basiqueRequest(with: oandaURLS.endpointStream(url: .pricing), date: .rfc3339)
 
-	// MARK: - Stream Handling
+		let streamTask = session.dataTask(with: request)
+
+		streamTasks.append(streamTask)
+
+
+
+
+	}
 
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
 		if let rep = response as? HTTPURLResponse, rep.statusCode == 200 {
@@ -98,6 +108,9 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 		}
 		completionHandler(.cancel)
 	}
+
+	// MARK: - Stream Handling
+
 
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
 		streamTask.captureStreams()
@@ -113,7 +126,7 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 		outputStream.open()
 	}
 
-	public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+	func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
 
 		switch eventCode {
 		case .hasBytesAvailable:
@@ -146,5 +159,4 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 		}
 		print(str)
 	}
-
 }

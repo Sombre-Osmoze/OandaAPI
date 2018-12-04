@@ -20,10 +20,8 @@ public struct SubAccount : Codable {
 
 
 public struct AccountSummary: Codable {
-
-	let account : Account
-	let lastTransactionID : TransactionID
-
+	public let account : Account
+	public let lastTransactionID : TransactionID
 }
 
 /// The string representation of an Account Identifier.
@@ -61,7 +59,7 @@ public struct Account : Codable {
 	public let resettablePL : AccountUnits
 
 	/// The total realized profit/loss for the Account since it was last reset by the client.
-	public let resettablePLTime : DateTime
+	public let resettablePLTime : String
 
 	/// The total amount of commission paid over the lifetime of the Account.
 	public let financing : AccountUnits
@@ -79,13 +77,13 @@ public struct Account : Codable {
 
 	/// The date/time when the Account entered a margin call state.
 	/// Only provided if the Account is in a margin call.
-	public let marginCallEnterTime : DateTime
+	public let marginCallEnterTime : DateTime?
 
 	/// The number of times that the Account’s current margin call was extended.
-	public let marginCallExtensionCount : Int
+	public let marginCallExtensionCount : Int?
 
 	///  The date/time of the Account’s last margin call extension.
-	public let lastMarginCallExtensionTime : Date
+	public let lastMarginCallExtensionTime : Date?
 
 	/// The number of Trades currently open in the Account.
 	public let openTradeCount : Int
@@ -144,15 +142,15 @@ public struct Account : Codable {
 	public let lastTransactionID : TransactionID
 
 	/// The details of the Trades currently open in the Account.
-	public let trades : [String]
+	public let trades : [String]?
 	// TODO: Trade Structure
 
 	/// The details all Account Positions.
-	public let positions : [String]
+	public let positions : [String]?
 	// TODO: Position Structure
 
 	/// The details of the Orders currently pending in the Account.
-	public let orders : [Order]
+	public let orders : [Order]?
 
 }
 
@@ -267,7 +265,8 @@ public struct CalculatedAccountState: Codable {
 	public let marginCloseoutMarginUsed : AccountUnits
 
 	/// The Account’s margin closeout percentage. When this value is 1.0 or above the Account is in a margin closeout situation.
-	public let marginCloseoutPercent : DecimalNumber
+	public let marginCloseoutPercent : String
+	// TODO: JSON
 
 	/// The value of the Account’s open positions as used for margin closeout calculations represented in the Account’s home currency.
 	public let marginCloseoutPositionValue : DecimalNumber

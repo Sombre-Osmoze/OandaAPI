@@ -10,8 +10,9 @@ import Foundation
 
 // MARK: Primitives Definitions
 
+// TODO: JSON
 /// The string representation of a decimal number.
-public typealias DecimalNumber = Double
+public typealias DecimalNumber = String
 
 /// The string representation of a quantity of an Account’s home currency.
 public typealias AccountUnits = String

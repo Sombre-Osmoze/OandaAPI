@@ -30,6 +30,10 @@ public struct Oanda {
 		case accounts
 		case pricing
 
+		enum Stream {
+			case pricing
+		}
+
 		enum Account {
 			case id
 			case summary
@@ -101,19 +105,22 @@ public struct Oanda {
 
 	}
 
-	func endpointStream(url type: EndpointsURL) -> URL {
+	func endpointStream(url type: EndpointsURL.Stream) -> URL {
 
 		switch type {
 		case .pricing:
 			return URL(string: main(true) + version + accounts + account + "/" + pricing)!
-		default:
-			fatalError()
 		}
 	}
 
-	public static func dateFormat() -> ISO8601DateFormatter {
-		let format = ISO8601DateFormatter()
-		format.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+	public static func dateFormat() -> DateFormatter {
+//		let format = ISO8601DateFormatter()
+//		format.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+		let format = DateFormatter()
+		format.calendar = Calendar(identifier: .iso8601)
+		format.locale = Locale(identifier: "en_US_POSIX")
+		format.timeZone = TimeZone(secondsFromGMT: 0)
+		format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
 		return format
 	}
 }
