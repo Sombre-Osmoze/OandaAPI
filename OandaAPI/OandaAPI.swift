@@ -8,6 +8,26 @@
 
 import Foundation
 
+public enum Pairs: String {
+	case eur = "EUR"
+	case gbp = "GBP"
+	case usd = "USD"
+	case jpy = "JPY"
+}
+
+
+extension InstrumentName {
+
+	public init(_ buy: Pairs, _ sell: Pairs) {
+		self = buy.rawValue + "_" + sell.rawValue
+	}
+
+	public func pair() -> (Pairs , Pairs) {
+		let pairs = self.split(separator: "_")
+		return (Pairs(rawValue: String(pairs.first!))!, Pairs(rawValue: String(pairs.last!))!)
+	}
+
+}
 
 /// You can use this structure for all oanda infomation
 public struct Oanda {
@@ -24,13 +44,13 @@ public struct Oanda {
 	/// - version: The Api version
 	/// - accounts: The endpoint to fetch all of the account related to a token
 	/// - pricing: The endpoint to fetch all of the pricing of instruments
-	enum EndpointsURL {
+	public enum EndpointsURL {
 		case main
 		case version
 		case accounts
 		case pricing
 
-		enum Stream {
+		public enum Stream {
 			case pricing
 		}
 
@@ -105,11 +125,11 @@ public struct Oanda {
 
 	}
 
-	func endpointStream(url type: EndpointsURL.Stream) -> URL {
+	func endpointStream(url type: EndpointsURL.Stream, param: String) -> URL {
 
 		switch type {
 		case .pricing:
-			return URL(string: main(true) + version + accounts + account + "/" + pricing)!
+			return URL(string: main(true) + version + accounts + account + "/" + pricing + "/stream" + param)!
 		}
 	}
 

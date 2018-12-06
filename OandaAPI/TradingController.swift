@@ -9,26 +9,39 @@
 import Foundation
 
 
-public protocol TradingControllerDelegate {
+public protocol TradingControllerDelegate: AnyObject {
 
+	func receivePrice(_ price: Price) -> Void
 
+	func receiveHeartbeat(_ heartbeat: PricingHeartbeat) -> Void
+
+	func receiveError(_ error: Error) -> Void
 }
 
-open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
+open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate, StreamDelegate {
 
-	var session : URLSession
 	public let oandaURLS : Oanda
-	private let credential : URLCredential
 	public var delegate : TradingControllerDelegate? = nil
 
+	private var streamSession : URLSession
+	private var session : URLSession
+
+	private let credential : URLCredential
 	private var streamTasks : [URLSessionTask] = []
+
+	private let jsonDecoder : JSONDecoder
 
 	public init(with credentials: URLCredential, is practice: Bool) {
 		oandaURLS = .init(with: credentials.user!, is: practice)
 		credential = credentials
+		jsonDecoder = JSONDecoder()
+		jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
+
 		session = .init(configuration: .ephemeral)
+		streamSession = .init(configuration: .ephemeral)
 		super.init()
 		session = .init(configuration: .default, delegate: self, delegateQueue: nil)
+		streamSession = .init(configuration: .default, delegate: self, delegateQueue: nil)
 	}
 
 	func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
@@ -89,34 +102,44 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 	}
 
 
-	func marketPrice(for instruments: [InstrumentName]) -> Void {
+	public func marketPrice(for instruments: [InstrumentName], snapshot: Bool) -> Void {
 
-		let request = basiqueRequest(with: oandaURLS.endpointStream(url: .pricing), date: .rfc3339)
+		// TODO: Better encoding (HTTP URL)
+		var param = instruments.description.replacingOccurrences(of: ", ", with: "%2C")
+		param.removeFirst()
+		param.removeLast()
+		let id : AccountID  = "101-004-9871381-001"
+		param = "instruments=EUR_JPY%2CEUR_USD%2CEUR_GBP&snapshot=false"
+//			+ param.replacingOccurrences(of: "\"", with: "") + "&snapshot=\(snapshot.description)"
+		let url = URL(string: "https://stream-fxpractice.oanda.com/v3/accounts/\(id)/pricing/stream?instruments=EUR_JPY%2CEUR_USD%2CEUR_GBP&snapshot=false")!
+		let request = basiqueRequest(with: url, date: .rfc3339)
 
-		let streamTask = session.dataTask(with: request)
-
-		streamTasks.append(streamTask)
-
-
-
-
+		let streamTask = streamSession.dataTask(with: request)
+		streamTask.resume()
 	}
 
-	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-		if let rep = response as? HTTPURLResponse, rep.statusCode == 200 {
-			completionHandler(.becomeStream)
+	public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+		if let rep = response as? HTTPURLResponse {
+			if session == streamSession, rep.statusCode == 200 {
+				completionHandler(.becomeStream)
+			} else {
+				completionHandler(.allow)
+			}
+		} else {
+			completionHandler(.cancel)
 		}
-		completionHandler(.cancel)
 	}
+
 
 	// MARK: - Stream Handling
 
+	public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
 
-	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
 		streamTask.captureStreams()
 	}
 
-	func urlSession(_ session: URLSession, streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
+
+	public func urlSession(_ session: URLSession, streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
 		inputStream.delegate = self
 		outputStream.delegate = self
 		inputStream.schedule(in: .main, forMode: .default)
@@ -126,7 +149,7 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 		outputStream.open()
 	}
 
-	func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+	public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
 
 		switch eventCode {
 		case .hasBytesAvailable:
@@ -147,16 +170,31 @@ open class TradingController: NSObject, URLSessionDelegate, StreamDelegate {
 
 	private func readAvailableBytes(stream: InputStream) {
 		let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 1024)
-		var str = ""
+		var data = Data(capacity: 1024)
 
 		while stream.hasBytesAvailable {
+			// TODO: Get the default size for a instrument order
 			let numberOfBytesRead = stream.read(buffer, maxLength: 1024)
 
-			str += String(bytesNoCopy: buffer, length: numberOfBytesRead, encoding: .utf8, freeWhenDone: true)!
+			data.append(buffer, count: numberOfBytesRead)
 			if numberOfBytesRead == 0 {
 				break
 			}
 		}
+		let str = String(data: data, encoding: .utf8)!
 		print(str)
+		if str.contains("HEARTBEAT") {
+			do {
+				delegate?.receiveHeartbeat(try jsonDecoder.decode(PricingHeartbeat.self, from: data))
+			} catch {
+				delegate?.receiveError(error)
+			}
+		} else {
+			do {
+				delegate?.receivePrice(try jsonDecoder.decode(Price.self, from: data))
+			} catch {
+				delegate?.receiveError(error)
+			}
+		}
 	}
 }

@@ -24,6 +24,7 @@ public struct AccountSummary: Codable {
 	public let lastTransactionID : TransactionID
 }
 
+
 /// The string representation of an Account Identifier.
 /// “-“-delimited string with format “{siteID}-{divisionID}-{userID}-{accountNumber}”
 public typealias AccountID = String
