@@ -7,8 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED4CC7FE21B9C875003DF146 /* TradingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5621AE13790097A075 /* TradingController.swift */; };
+		ED4CC7FF21B9C877003DF146 /* OandaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5421AE13790097A075 /* OandaAPI.swift */; };
+		ED4CC80021B9C886003DF146 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5521AE13790097A075 /* Account.swift */; };
+		ED4CC80121B9C886003DF146 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB121AE2D2A0097A075 /* Instrument.swift */; };
+		ED4CC80221B9C886003DF146 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FC021AF0FD30097A075 /* Order.swift */; };
+		ED4CC80321B9C886003DF146 /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5721AE13790097A075 /* Trade.swift */; };
+		ED4CC80421B9C886003DF146 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FD621AF4C220097A075 /* Position.swift */; };
+		ED4CC80521B9C886003DF146 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FBD21AF06FF0097A075 /* Transaction.swift */; };
+		ED4CC80621B9C886003DF146 /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB521AE2DF10097A075 /* Pricing.swift */; };
+		ED4CC80721B9C886003DF146 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB821AE30630097A075 /* Primitives.swift */; };
+		ED4CC81021B9C966003DF146 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ED94F8E021B3CB700011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
 		ED94F8E121B3CB790011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
+		EDDBDFDF21B9E1060066E185 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDBDFDE21B9E1060066E185 /* Foundation.framework */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
 		EDFE8F8921AE27950097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDFE8F9721AE281F0097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,8 +84,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OandaAPI_WatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED94F8DF21B3CB5C0011F912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ED94F8E221B3CC8E0011F912 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
+		EDDBDFDE21B9E1060066E185 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		EDFE8F3E21AE134B0097A075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFE8F4321AE134B0097A075 /* OandaAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OandaAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OandaAPITests.swift; sourceTree = "<group>"; };
@@ -100,6 +114,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		ED4CC7F321B9C861003DF146 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDDBDFDF21B9E1060066E185 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFE8F4021AE134B0097A075 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +177,7 @@
 				EDFE8F7D21AE262A0097A075 /* OandaAPI_iOS.framework */,
 				EDFE8F8F21AE27D00097A075 /* OandaAPI.framework */,
 				EDFE8FC721AF1CF20097A075 /* DefinitionsTests.xctest */,
+				ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +206,7 @@
 		EDFE8F6621AE17600097A075 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDDBDFDE21B9E1060066E185 /* Foundation.framework */,
 				EDFE8FA121AE28590097A075 /* Foundation.framework */,
 				EDFE8F6721AE17600097A075 /* Foundation.framework */,
 			);
@@ -217,6 +241,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		ED4CC7F121B9C861003DF146 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED4CC81021B9C966003DF146 /* OandaAPI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFE8F7821AE262A0097A075 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,6 +268,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		ED4CC7F521B9C861003DF146 /* OandaAPI_WatchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED4CC7FD21B9C861003DF146 /* Build configuration list for PBXNativeTarget "OandaAPI_WatchOS" */;
+			buildPhases = (
+				ED4CC7F121B9C861003DF146 /* Headers */,
+				ED4CC7F221B9C861003DF146 /* Sources */,
+				ED4CC7F321B9C861003DF146 /* Frameworks */,
+				ED4CC7F421B9C861003DF146 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OandaAPI_WatchOS;
+			productName = OandaAPI_WatchOS;
+			productReference = ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		EDFE8F4221AE134B0097A075 /* OandaAPITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDFE8F5121AE134B0097A075 /* Build configuration list for PBXNativeTarget "OandaAPITests" */;
@@ -320,6 +370,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Marcus Florentin";
 				TargetAttributes = {
+					ED4CC7F521B9C861003DF146 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					EDFE8F4221AE134B0097A075 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -348,6 +401,7 @@
 			targets = (
 				EDFE8F8E21AE27D00097A075 /* OandaAPI */,
 				EDFE8F7C21AE262A0097A075 /* OandaAPI_iOS */,
+				ED4CC7F521B9C861003DF146 /* OandaAPI_WatchOS */,
 				EDFE8F4221AE134B0097A075 /* OandaAPITests */,
 				EDFE8FC621AF1CF20097A075 /* DefinitionsTests */,
 			);
@@ -355,6 +409,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		ED4CC7F421B9C861003DF146 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFE8F4121AE134B0097A075 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,6 +449,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		ED4CC7F221B9C861003DF146 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED4CC80021B9C886003DF146 /* Account.swift in Sources */,
+				ED4CC80121B9C886003DF146 /* Instrument.swift in Sources */,
+				ED4CC80221B9C886003DF146 /* Order.swift in Sources */,
+				ED4CC80321B9C886003DF146 /* Trade.swift in Sources */,
+				ED4CC80421B9C886003DF146 /* Position.swift in Sources */,
+				ED4CC80521B9C886003DF146 /* Transaction.swift in Sources */,
+				ED4CC80621B9C886003DF146 /* Pricing.swift in Sources */,
+				ED4CC80721B9C886003DF146 /* Primitives.swift in Sources */,
+				ED4CC7FE21B9C875003DF146 /* TradingController.swift in Sources */,
+				ED4CC7FF21B9C877003DF146 /* OandaAPI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFE8F3F21AE134B0097A075 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +543,63 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		ED4CC7FB21B9C861003DF146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z8Q82L44LS;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/OandaAPI/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-WatchOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.1;
+			};
+			name = Debug;
+		};
+		ED4CC7FC21B9C861003DF146 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z8Q82L44LS;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/OandaAPI/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-WatchOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 5.1;
+			};
+			name = Release;
+		};
 		EDFE8F4C21AE134B0097A075 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -770,6 +905,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		ED4CC7FD21B9C861003DF146 /* Build configuration list for PBXNativeTarget "OandaAPI_WatchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED4CC7FB21B9C861003DF146 /* Debug */,
+				ED4CC7FC21B9C861003DF146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDFE8F3421AE134B0097A075 /* Build configuration list for PBXProject "OandaAPI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -30,4 +30,17 @@ FOUNDATION_EXPORT const unsigned char OandaAPI_iOSVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <OandaAPI_iOS/PublicHeader.h>
 
+#elif TARGET_OS_WATCH
+
+#import <WatchKit/WatchKit.h>
+
+//! Project version number for OandaAPI_WatchOS.
+FOUNDATION_EXPORT double OandaAPI_WatchOSVersionNumber;
+
+//! Project version string for OandaAPI_WatchOS.
+FOUNDATION_EXPORT const unsigned char OandaAPI_WatchOSVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <OandaAPI_WatchOS/PublicHeader.h>
+
+
 #endif

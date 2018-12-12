@@ -49,11 +49,11 @@ public struct Price: Codable {
 	/// The factors used to convert quantities of this price’s Instrument’s quote currency into a quantity of the Account’s home currency.
 	/// When the includeHomeConversions is present in the pricing request (regardless of its value), this field will not be present.
 	@available(*, deprecated, message: "Will be removed in a future API update.")
-	public let quoteHomeConversionFactors : QuoteHomeConversionFactors
+	public let quoteHomeConversionFactors : QuoteHomeConversionFactors?
 
 	/// Representation of how many units of an Instrument are available to be traded by an Order depending on its postionFill option.
 	@available(*, deprecated, message: "Will be removed in a future API update.")
-	public let unitsAvailable : UnitsAvailable
+	public let unitsAvailable : UnitsAvailable?
 }
 
 /// A decimal number encodes as a string.

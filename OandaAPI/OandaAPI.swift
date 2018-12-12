@@ -115,6 +115,16 @@ public struct Oanda {
 		}
 	}
 
+	func endpoint(url type: EndpointsURL, param: String) -> URL {
+
+		switch type {
+		case .pricing:
+			return URL(string: main(false) + version + accounts + account + "/" + pricing + "?" + param)!
+		default:
+			fatalError("No code for this url type (\(type))")
+		}
+	}
+
 	func endpointAccount(url type: EndpointsURL.Account) -> URL {
 		switch type {
 		case .id:
@@ -129,7 +139,7 @@ public struct Oanda {
 
 		switch type {
 		case .pricing:
-			return URL(string: main(true) + version + accounts + account + "/" + pricing + "/stream" + param)!
+			return URL(string: main(true) + version + accounts + account + "/" + pricing + "/stream?" + param)!
 		}
 	}
 
@@ -139,7 +149,7 @@ public struct Oanda {
 		let format = DateFormatter()
 		format.calendar = Calendar(identifier: .iso8601)
 		format.locale = Locale(identifier: "en_US_POSIX")
-		format.timeZone = TimeZone(secondsFromGMT: 0)
+		format.timeZone = TimeZone.autoupdatingCurrent
 		format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
 		return format
 	}
