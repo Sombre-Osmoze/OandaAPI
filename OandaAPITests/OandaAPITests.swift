@@ -21,12 +21,12 @@ class OandaAPITests: XCTestCase {
 
 	func testAccountFectching() {
 
-		let tradeCtrl = TradingController()
-
-		tradeCtrl.checkAccounts(bearer: "04af41b186d7c8576f935ebfc9817d48-4d09e0a83ec3b6bbbd7eeff692d11613") { (subAccounts, error) in
-
-			XCTAssertGreaterThanOrEqual(subAccounts.count, 1)
-		}
+//		let tradeCtrl = TradingController()
+//
+//		tradeCtrl.checkAccounts(bearer: "04af41b186d7c8576f935ebfc9817d48-4d09e0a83ec3b6bbbd7eeff692d11613") { (subAccounts, error) in
+//
+//			XCTAssertGreaterThanOrEqual(subAccounts.count, 1)
+//		}
 
 	}
 
@@ -35,12 +35,12 @@ class OandaAPITests: XCTestCase {
         self.measure {
             // Put the code you want to measure the time of here.
 
-			let tradeCtrl = TradingController()
-
-			tradeCtrl.checkAccounts(bearer: "04af41b186d7c8576f935ebfc9817d48-4d09e0a83ec3b6bbbd7eeff692d11613") { (subAccounts, error) in
-
-				XCTAssertGreaterThanOrEqual(subAccounts.count, 1)
-			}
+//			let tradeCtrl = TradingController()
+//
+//			tradeCtrl.checkAccounts(bearer: "04af41b186d7c8576f935ebfc9817d48-4d09e0a83ec3b6bbbd7eeff692d11613") { (subAccounts, error) in
+//
+//				XCTAssertGreaterThanOrEqual(subAccounts.count, 1)
+//			}
         }
     }
 

@@ -18,6 +18,9 @@
 		ED4CC80621B9C886003DF146 /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB521AE2DF10097A075 /* Pricing.swift */; };
 		ED4CC80721B9C886003DF146 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB821AE30630097A075 /* Primitives.swift */; };
 		ED4CC81021B9C966003DF146 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
+		ED7B747F21C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
+		ED7B748021C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
 		ED94F8E021B3CB700011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
 		ED94F8E121B3CB790011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
 		EDDBDFDF21B9E1060066E185 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDBDFDE21B9E1060066E185 /* Foundation.framework */; };
@@ -85,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OandaAPI_WatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPriceStream.swift; sourceTree = "<group>"; };
 		ED94F8DF21B3CB5C0011F912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ED94F8E221B3CC8E0011F912 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		EDDBDFDE21B9E1060066E185 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -157,6 +161,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED7B747C21C3377A00127E3E /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
 		EDFE8F3021AE134B0097A075 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +201,7 @@
 				EDFE8F3E21AE134B0097A075 /* Info.plist */,
 				EDFE8F5621AE13790097A075 /* TradingController.swift */,
 				EDFE8F5421AE13790097A075 /* OandaAPI.swift */,
+				ED7B747C21C3377A00127E3E /* Stream */,
 				EDFE8FB421AE2D340097A075 /* Definitions */,
 			);
 			path = OandaAPI;
@@ -458,6 +471,7 @@
 				ED4CC80221B9C886003DF146 /* Order.swift in Sources */,
 				ED4CC80321B9C886003DF146 /* Trade.swift in Sources */,
 				ED4CC80421B9C886003DF146 /* Position.swift in Sources */,
+				ED7B748021C337AB00127E3E /* MarketPriceStream.swift in Sources */,
 				ED4CC80521B9C886003DF146 /* Transaction.swift in Sources */,
 				ED4CC80621B9C886003DF146 /* Pricing.swift in Sources */,
 				ED4CC80721B9C886003DF146 /* Primitives.swift in Sources */,
@@ -483,6 +497,7 @@
 				EDFE8FBF21AF06FF0097A075 /* Transaction.swift in Sources */,
 				EDFE8FC221AF0FD30097A075 /* Order.swift in Sources */,
 				EDFE8F9921AE283D0097A075 /* OandaAPI.swift in Sources */,
+				ED7B747F21C337AB00127E3E /* MarketPriceStream.swift in Sources */,
 				EDFE8F9A21AE283D0097A075 /* Trade.swift in Sources */,
 				EDFE8F9821AE283D0097A075 /* Account.swift in Sources */,
 				EDFE8F9B21AE283D0097A075 /* TradingController.swift in Sources */,
@@ -500,6 +515,7 @@
 				EDFE8FBE21AF06FF0097A075 /* Transaction.swift in Sources */,
 				EDFE8FC121AF0FD30097A075 /* Order.swift in Sources */,
 				EDFE8F9D21AE283E0097A075 /* OandaAPI.swift in Sources */,
+				ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */,
 				EDFE8F9E21AE283E0097A075 /* Trade.swift in Sources */,
 				EDFE8F9C21AE283E0097A075 /* Account.swift in Sources */,
 				EDFE8F9F21AE283E0097A075 /* TradingController.swift in Sources */,

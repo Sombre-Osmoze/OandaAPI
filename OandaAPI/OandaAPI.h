@@ -23,7 +23,7 @@ FOUNDATION_EXPORT const unsigned char OandaAPIVersionString[];
 #import <UIKit/UIKit.h>
 
 //! Project version number for OandaAPI_iOS.
-FOUNDATION_EXPORT double OandaAPI_iOSVersionNumber;
+FOUNDATION_EXPORT double OandaAPI_iOSVersionNumber; 
 
 //! Project version string for OandaAPI_iOS.
 FOUNDATION_EXPORT const unsigned char OandaAPI_iOSVersionString[];
