@@ -29,13 +29,13 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 	init(stream request: URLRequest, delegate: MarketPriceStreamDelegate) {
 
 		self.request = request
-
 		jsonDecoder = JSONDecoder()
 		jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
 		self.delegate = delegate
 
 		super.init()
 		self.session = .init(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+		session.dataTask(with: request).resume()
 	}
 
 
@@ -45,10 +45,15 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 
 	}
 
+	public func restart() -> Void {
+
+		close()
+		session.dataTask(with: request).resume()
+	}
 
 	// MARK: - URL Session Delegate
 
-	private func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+	public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
 		if let rep = response as? HTTPURLResponse {
 			if rep.statusCode == 200 {
 				completionHandler(.becomeStream)
@@ -63,20 +68,20 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 
 	// MARK: - Stream Handling
 
-	private func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
+	public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
 
 		streamTask.captureStreams()
 	}
 
 
-	private func urlSession(_ session: URLSession, streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
+	public func urlSession(_ session: URLSession, streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
 		inputStream.delegate = self
 		inputStream.schedule(in: .main, forMode: .default)
 		inputStream.open()
 		streamTask.startSecureConnection()
 	}
 
-	private func urlSession(_ session: URLSession, betterRouteDiscoveredFor streamTask: URLSessionStreamTask) {
+	public func urlSession(_ session: URLSession, betterRouteDiscoveredFor streamTask: URLSessionStreamTask) {
 		streamTask.stopSecureConnection()
 		streamTask.closeRead()
 		streamTask.closeWrite()
