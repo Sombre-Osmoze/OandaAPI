@@ -29,7 +29,7 @@ extension InstrumentName {
 
 }
 
-/// You can use this structure for all oanda infomation
+/// You can use this structure for all oanda infomations
 public struct Oanda {
 
 	/// If it's demo account or not
@@ -101,7 +101,7 @@ public struct Oanda {
 	}
 
 
-	func main(_ stream: Bool = false) -> String {
+	private func main(_ stream: Bool = false) -> String {
 		if stream {
 			return "https://" + (isPractice ? streamPractice : self.stream) + "/"
 		}
@@ -126,7 +126,7 @@ public struct Oanda {
 
 		switch type {
 		case .pricing:
-			return URL(string: main() + version + accounts + account + "/" + pricing + "?" + param)!
+			return URL(string: main() + version + accounts + account + "/" + pricing + "?" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
 		default:
 			fatalError("No code for this url type (\(type))")
 		}
@@ -145,11 +145,11 @@ public struct Oanda {
 	func endpoint(url type: EndpointsURL.Instrument, name: InstrumentName, param: String) -> URL {
 		switch type {
 		case .candles:
-			return URL(string: main() + version + name + "/candles" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+			return URL(string: main() + version + instruments + name + "/candles?" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
 		case .orderBook:
-			return URL(string: main() + version + name + "/orderBook" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+			return URL(string: main() + version + instruments + name + "/orderBook?" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
 		case .positionBook:
-			return URL(string: main() + version + name + "/positionBook" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+			return URL(string: main() + version + instruments +  name + "/positionBook?" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
 		}
 	}
 

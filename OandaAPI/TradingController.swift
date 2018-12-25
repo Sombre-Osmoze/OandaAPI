@@ -34,7 +34,7 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		streamSession = .init(configuration: .default, delegate: self, delegateQueue: nil)
 	}
 
-	func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
+	private func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
 		var request = URLRequest(url: url)
 
 		request.allHTTPHeaderFields = ["Authorization" : "Bearer \(credential.password!)",
@@ -42,8 +42,21 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		return request
 	}
 
-	func getData(for instrument: InstrumentName) -> Void {
+	public func getData(for instrument: InstrumentName) -> Void {
 
+		let param = "count=2&from=" + Oanda.dateFormat().string(from: Date(timeIntervalSinceNow: 60 * 60 * 30 * -1))
+
+
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .candles, name: instrument, param: param),
+									 date: .rfc3339)
+
+		session.dataTask(with: request) { (data, response, error) in
+
+			if error == nil, data != nil {
+
+				print(String(data: data!, encoding: .utf8))
+			}
+		}.resume()
 	}
 
 	public func accountSummary(completion handler: @escaping(_ summary: AccountSummary?, _ error: Error?) -> Void) -> Void {
