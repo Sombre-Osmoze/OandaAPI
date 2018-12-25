@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Pairs: String {
+public enum Pairs: String, Codable {
 	case eur = "EUR"
 	case gbp = "GBP"
 	case usd = "USD"
@@ -113,6 +113,9 @@ public struct Oanda {
 		case .pricing:
 			return URL(string: main(false) + version + accounts + account + "/" + pricing)!
 		}
+
+		let test : String = "ij'oj"
+		let other : String? = "ijhijij"
 	}
 
 	func endpoint(url type: EndpointsURL, param: String) -> URL {

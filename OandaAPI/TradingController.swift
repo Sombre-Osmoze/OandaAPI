@@ -91,17 +91,17 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		}.resume()
 	}
 
-
 	public func marketPrice(for instruments: [InstrumentName], since date: DateTime) {
-		// TODO: Better encoding (HTTP URL)
-		var param = instruments.description.replacingOccurrences(of: ", ", with: "%2C")
+		var param = instruments.description.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 		param.removeFirst()
 		param.removeLast()
 		let format = Oanda.dateFormat()
 		let strDate = format.string(from: date).replacingOccurrences(of: "\"", with: "")
-		param = "instruments=" + param.replacingOccurrences(of: "\"", with: "") + "&since=\(strDate)"
+		param = "instruments=" + "&since=\(strDate)"
 
-		let request = basiqueRequest(with: oandaURLS.endpoint(url: .pricing, param: param), date: .rfc3339)
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .pricing,
+															  param: param),
+									 date: .rfc3339)
 
 		session.dataTask(with: request) { (data, response, error) in
 

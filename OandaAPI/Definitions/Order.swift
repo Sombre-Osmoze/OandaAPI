@@ -74,7 +74,9 @@ struct TakeProfitOrder : Codable, OrderBase {
 	public let tradeID : TradeID
 }
 
-/// A StopLossOrder is an order that is linked to an open Trade and created with a price threshold. The Order will be filled (closing the Trade) by the first price that is equal to or worse than the threshold. A StopLossOrder cannot be used to open a new Position.
+/// A StopLossOrder is an order that is linked to an open Trade and created with a price threshold.
+/// The Order will be filled (closing the Trade) by the first price that is equal to or worse than the threshold.
+/// A StopLossOrder cannot be used to open a new Position.
 struct StopLossOrder : Codable, OrderBase {
 
 	public let id : OrderID
