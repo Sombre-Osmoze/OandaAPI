@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate, StreamDelegate {
+open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate, {
 
 	public let oandaURLS : Oanda
 
@@ -30,8 +30,9 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		session = .init(configuration: .ephemeral)
 		streamSession = .init(configuration: .ephemeral)
 		super.init()
-		session = .init(configuration: .default, delegate: self, delegateQueue: nil)
-		streamSession = .init(configuration: .default, delegate: self, delegateQueue: nil)
+		let ope = OperationQueue()
+		session = .init(configuration: .default, delegate: self, delegateQueue: ope)
+		streamSession = .init(configuration: .default, delegate: self, delegateQueue: ope)
 	}
 
 	private func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
