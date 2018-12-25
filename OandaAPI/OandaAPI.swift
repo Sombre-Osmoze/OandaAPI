@@ -58,6 +58,12 @@ public struct Oanda {
 			case id
 			case summary
 		}
+
+		enum Instrument {
+			case candles
+			case orderBook
+			case positionBook
+		}
 	}
 
 	/// The rest "URLProtectionSpace"
@@ -73,6 +79,7 @@ public struct Oanda {
 
 	private let version = "v3/"
 	private let accounts = "accounts/"
+	private let instruments = "instruments/"
 	private let pricing = "pricing"
 	private let summary = "summary"
 
@@ -94,7 +101,7 @@ public struct Oanda {
 	}
 
 
-	func main(_ stream: Bool) -> String {
+	func main(_ stream: Bool = false) -> String {
 		if stream {
 			return "https://" + (isPractice ? streamPractice : self.stream) + "/"
 		}
@@ -105,37 +112,45 @@ public struct Oanda {
 
 		switch type {
 		case .main:
-			return URL(string: main(false))!
+			return URL(string: main())!
 		case .version:
-			return URL(string: main(false) + version)!
+			return URL(string: main() + version)!
 		case .accounts:
-			return URL(string: main(false) + version + accounts)!
+			return URL(string: main() + version + accounts)!
 		case .pricing:
-			return URL(string: main(false) + version + accounts + account + "/" + pricing)!
+			return URL(string: main() + version + accounts + account + "/" + pricing)!
 		}
-
-		let test : String = "ij'oj"
-		let other : String? = "ijhijij"
 	}
 
 	func endpoint(url type: EndpointsURL, param: String) -> URL {
 
 		switch type {
 		case .pricing:
-			return URL(string: main(false) + version + accounts + account + "/" + pricing + "?" + param)!
+			return URL(string: main() + version + accounts + account + "/" + pricing + "?" + param)!
 		default:
 			fatalError("No code for this url type (\(type))")
 		}
 	}
 
-	func endpointAccount(url type: EndpointsURL.Account) -> URL {
+	func endpoint(url type: EndpointsURL.Account) -> URL {
 		switch type {
 		case .id:
-			return URL(string: main(false) + version + accounts + account)!
+			return URL(string: main() + version + accounts + account)!
 		case .summary:
-			return URL(string: main(false) + version + accounts + account + "/" + summary)!
+			return URL(string: main() + version + accounts + account + "/" + summary)!
 		}
 
+	}
+
+	func endpoint(url type: EndpointsURL.Instrument, name: InstrumentName, param: String) -> URL {
+		switch type {
+		case .candles:
+			return URL(string: main() + version + name + "/candles" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+		case .orderBook:
+			return URL(string: main() + version + name + "/orderBook" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+		case .positionBook:
+			return URL(string: main() + version + name + "/positionBook" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+		}
 	}
 
 	func endpointStream(url type: EndpointsURL.Stream, param: String) -> URL {

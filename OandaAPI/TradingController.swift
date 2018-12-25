@@ -42,9 +42,12 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		return request
 	}
 
+	func getData(for instrument: InstrumentName) -> Void {
+
+	}
 
 	public func accountSummary(completion handler: @escaping(_ summary: AccountSummary?, _ error: Error?) -> Void) -> Void {
-		let request = basiqueRequest(with: oandaURLS.endpointAccount(url: .summary), date: .rfc3339)
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .summary), date: .rfc3339)
 
 		session.dataTask(with: request) { (data, response, error) in
 
