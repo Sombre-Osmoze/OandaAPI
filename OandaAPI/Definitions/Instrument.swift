@@ -8,6 +8,18 @@
 
 import Foundation
 
+
+public struct InstrumentCandles: Codable {
+
+	public let instrument: InstrumentName
+
+	public let granularity : CandlestickGranularity
+
+	public let candles: [Candlestick]
+}
+
+// MARK: Instrument Definitions
+
 /// The string representation of the OANDA-assigned TradeID.
 /// OANDA-assigned TradeIDs are positive integers, and are derived from the TransactionID of the Transaction that opened the Trade.
 public typealias InstrumentName = String
@@ -86,15 +98,15 @@ public struct Candlestick: Codable {
 
 	/// The candlestick data based on bids.
 	/// Only provided if bid-based candles were requested.
-	public let bid : CandlestickData
+	public let bid : CandlestickData?
 
 	/// The candlestick data based on asks.
 	/// Only provided if ask-based candles were requested.
-	public let ask : CandlestickData
+	public let ask : CandlestickData?
 
 	/// The candlestick data based on midpoints.
 	/// Only provided if midpoint-based candles were requested.
-	public let mid : CandlestickData
+	public let mid : CandlestickData?
 
 	/// The number of prices created during the time-range represented by the candlestick.
 	public let volume : Int

@@ -44,7 +44,7 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 
 	public func getData(for instrument: InstrumentName) -> Void {
 
-		let param = "count=2&from=" + Oanda.dateFormat().string(from: Date(timeIntervalSinceNow: 60 * 60 * 30 * -1))
+		let param = "count=5000&from=" + Oanda.dateFormat().string(from: Date(timeIntervalSinceNow: 60 * 60 * 30 * 10 * -1))
 
 
 		let request = basiqueRequest(with: oandaURLS.endpoint(url: .candles, name: instrument, param: param),
@@ -53,8 +53,13 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		session.dataTask(with: request) { (data, response, error) in
 
 			if error == nil, data != nil {
-
-				print(String(data: data!, encoding: .utf8))
+				do {
+					let instr = try self.jsonDecoder.decode(InstrumentCandles.self, from: data!)
+					print(instr.candles.count)
+					print(instr.granularity)
+				} catch {
+					print(error)
+				}
 			}
 		}.resume()
 	}
