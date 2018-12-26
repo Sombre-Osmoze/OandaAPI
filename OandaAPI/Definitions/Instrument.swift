@@ -20,10 +20,6 @@ public struct InstrumentCandles: Codable {
 
 // MARK: Instrument Definitions
 
-/// The string representation of the OANDA-assigned TradeID.
-/// OANDA-assigned TradeIDs are positive integers, and are derived from the TransactionID of the Transaction that opened the Trade.
-public typealias InstrumentName = String
-
 /// The granularity of a candlestick
 ///
 /// - s5: 5 second candlesticks, minute alignment
