@@ -8,10 +8,9 @@
 
 import Foundation
 
-open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate, {
+open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate {
 
 	public let oandaURLS : Oanda
-
 
 	private var streamSession : URLSession
 	private var session : URLSession
@@ -43,23 +42,35 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		return request
 	}
 
-	public func getData(for instrument: InstrumentName) -> Void {
+	public func getData(for query: InstrumentCandlesQuery,
+						completion handler: @escaping(_ data: InstrumentCandles?, _ error: Error?)->Void) -> Void {
 
-		let param = "count=5000&from=" + Oanda.dateFormat().string(from: Date(timeIntervalSinceNow: 60 * 60 * 30 * 10 * -1))
+		var param : String = ""
+
+		param += "smooth=\(query.smooth.description)"
+		param += "&granularity=\(query.granularity.rawValue)"
+
+		param += "&price=MAB"
+		if query.from != nil {
+			param += "&from=\(Oanda.dateFormat().string(from: query.from!))"
+		}
+		if query.to != nil {
+			param += "&to=\(Oanda.dateFormat().string(from: query.to!))"
+		}
+		if query.from == nil || query.to == nil {
+			param += "&count=\(query.count.description)"
+		}
 
 
-		let request = basiqueRequest(with: oandaURLS.endpoint(url: .candles, name: instrument, param: param),
-									 date: .rfc3339)
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .candles, name: query.instrument, param: param),
+									 date: query.dateFormat)
 
 		session.dataTask(with: request) { (data, response, error) in
-
 			if error == nil, data != nil {
 				do {
-					let instr = try self.jsonDecoder.decode(InstrumentCandles.self, from: data!)
-					print(instr.candles.count)
-					print(instr.granularity)
+					handler(try self.jsonDecoder.decode(InstrumentCandles.self, from: data!), nil)
 				} catch {
-					print(error)
+					handler(nil, error)
 				}
 			}
 		}.resume()
@@ -147,4 +158,3 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 	}
 
 }
-

@@ -18,6 +18,52 @@ public struct InstrumentCandles: Codable {
 	public let candles: [Candlestick]
 }
 
+public struct InstrumentCandlesQuery {
+
+	/// The Price component(s) to get candlestick data for.
+	/// Can contain any combination of the characters
+	///
+	/// - ask: ask candles
+	/// - mid: midpoint candles
+	/// - bid: bid candles
+	public enum Price: String, Codable {
+		/// ask candles
+		case ask = "A"
+		/// midpoint candles
+		case mid = "M"
+		/// bid candles
+		case bid = "B"
+	}
+
+	public var price : Price = .mid
+
+	public let instrument : InstrumentName
+
+	public let dateFormat : AcceptDatetimeFormat
+
+	public var count : Int = 500
+
+	public var from : DateTime? = nil
+
+	public var to : DateTime? = nil
+
+	public var smooth : Bool = false
+
+	public var granularity : CandlestickGranularity = .s5
+
+	public var weeklyAlignment : WeeklyAlignment = .friday
+
+	public var alignmentTimezone : String = "America/New_York"
+
+	public var includeFirst : Bool = true
+
+	public init(name : InstrumentName, date format: AcceptDatetimeFormat) {
+
+		instrument = name
+		dateFormat = format
+	}
+}
+
 // MARK: Instrument Definitions
 
 /// The granularity of a candlestick
