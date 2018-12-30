@@ -28,13 +28,12 @@ public typealias InstrumentName = String
 
 
 /// The type of an Instrument.
-///
-/// - currency: Currency
-/// - CFD: Contract For Difference
-/// - metal: Metal
 public enum InstrumentType: String, Codable {
+	/// Currency
 	case currency = "CURRENCY"
+	/// Contract For Difference
 	case CFD = "CFD"
+	/// Metal
 	case metal = "METAL"
 }
 
@@ -98,11 +97,11 @@ public typealias DateTime = Date
 
 
 /// DateTime header
-///
-/// - unix: if “UNIX” is specified DateTime fields will be specified or returned in the “12345678.000000123” format
-/// - rfc3339: If “RFC3339” is specified DateTime will be specified or returned in “YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ” format.
 public enum AcceptDatetimeFormat: String, Codable {
+
+	/// if “UNIX” is specified DateTime fields will be specified or returned in the “12345678.000000123” format
 	case unix = "UNIX"
+	/// If “RFC3339” is specified DateTime will be specified or returned in “YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ” format.
 	case rfc3339 = "RFC3339"
 }
 
@@ -135,12 +134,11 @@ public struct GuaranteedStopLossOrderLevelRestriction: Codable {
 
 
 /// In the context of an Order or a Trade, defines whether the units are positive or negative.
-///
-/// - long: A long Order is used to to buy units of an Instrument.
-///         A Trade is long when it has bought units of an Instrument.
-/// - short: A short Order is used to to sell units of an Instrument.
-///          A Trade is short when it has sold units of an Instrument.
 public enum Direction: String, Codable {
+	/// A long Order is used to to buy units of an Instrument.
+	/// A Trade is long when it has bought units of an Instrument.
 	case long = "LONG"
+	/// A short Order is used to to sell units of an Instrument.
+	/// A Trade is short when it has sold units of an Instrument.
 	case short = "SHORT"
 }

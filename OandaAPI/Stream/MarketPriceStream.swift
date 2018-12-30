@@ -10,11 +10,11 @@ import Foundation
 
 public protocol MarketPriceStreamDelegate: AnyObject {
 
-	func receivePrice(_ price: Price) -> Void
+	func receive(_ prices: [Price]) -> Void
 
-	func receiveHeartbeat(_ heartbeat: PricingHeartbeat) -> Void
+	func receive(_ heartbeat: PricingHeartbeat) -> Void
 
-	func receiveError(_ error: Error) -> Void
+	func receive(_ error: Error) -> Void
 }
 
 public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate {
@@ -121,12 +121,12 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 		}
 		do {
 			if data.count == 61 {
-				delegate?.receiveHeartbeat(try jsonDecoder.decode(PricingHeartbeat.self, from: data))
+				delegate?.receive(try jsonDecoder.decode(PricingHeartbeat.self, from: data))
 			} else {
-				delegate?.receivePrice(try jsonDecoder.decode(Price.self, from: data))
+				delegate?.receive([try jsonDecoder.decode(Price.self, from: data)])
 			}
 		} catch {
-			delegate?.receiveError(error)
+			delegate?.receive(error)
 		}
 		free(buffer)
 	}
