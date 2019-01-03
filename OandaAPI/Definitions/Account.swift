@@ -315,23 +315,21 @@ public struct AccountChanges: Codable {
 }
 
 /// The financing mode of an Account
-///
-/// - noFinancing: No financing is paid/charged for open Trades in the Account
-/// - secondBySecond: Second-by-second financing is paid/charged for open Trades in the Account, both daily and when the the Trade is closed
-/// - daily: A full day’s worth of financing is paid/charged for open Trades in the Account daily at 5pm New York time
 enum AccountFinancingMode: String, Codable {
+	/// No financing is paid/charged for open Trades in the Account
 	case noFinancing = "NO_FINANCING"
+	/// Second-by-second financing is paid/charged for open Trades in the Account, both daily and when the the Trade is closed
 	case secondBySecond = "SECOND_BY_SECOND"
+	// A full day’s worth of financing is paid/charged for open Trades in the Account daily at 5pm New York time
 	case daily = "DAILY"
 }
 
 /// The way that position values for an Account are calculated and aggregated.
-///
-/// - absoluteSum: The Position value or margin for each side (long and short) of the Position are computed independently and added together.
-/// - maximalSide: The Position value or margin for each side (long and short) of the Position are computed independently. The Position value or margin chosen is the maximal absolute value of the two.
-/// - netSum: The units for each side (long and short) of the Position are netted together and the resulting value (long or short) is used to compute the Position value or margin.
 public enum PositionAggregationMode: String, Codable {
+	/// The Position value or margin for each side (long and short) of the Position are computed independently and added together.
 	case absoluteSum = "ABSOLUTE_SUM"
+	/// The Position value or margin for each side (long and short) of the Position are computed independently. The Position value or margin chosen is the maximal absolute value of the two.
 	case maximalSide = "MAXIMAL_SIDE"
+	/// The units for each side (long and short) of the Position are netted together and the resulting value (long or short) is used to compute the Position value or margin.
 	case netSum = "NET_SUM"
 }

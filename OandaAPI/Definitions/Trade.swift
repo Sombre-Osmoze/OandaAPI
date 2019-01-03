@@ -27,13 +27,12 @@ public typealias TradeID = String
 
 
 /// The current state of the trade
-///
-/// - open: The Trade is currently open
-/// - close: The Trade has been fully closed
-/// - closeWhenTradeable: The Trade will be closed as soon as the trade’s instrument becomes tradeable
 public enum TradeState : String, Codable {
+	/// The Trade is currently open
 	case open = "OPEN"
+	/// The Trade has been fully closed
 	case close = "CLOSED"
+	/// The Trade will be closed as soon as the trade’s instrument becomes tradeable
 	case closeWhenTradeable = "CLOSE_WHEN_TRADEABLE"
 }
 
@@ -44,15 +43,14 @@ public typealias TradeSpecifier = String
 
 
 /// The state to filter the Trades by
-///
-/// - open: The Trades that are currently open
-/// - close: The Trades that have been fully closed
-/// - closeWhenTradeable: The Trades that will be closed as soon as the trades’ instrument becomes tradeable
-/// - all: The Trades that are in any of the possible states listed above.
 public enum TradeStateFilter : String, Codable {
+	/// The Trades that are currently open
 	case open = "OPEN"
+	/// The Trades that have been fully closed
 	case close = "CLOSED"
+	/// The Trades that will be closed as soon as the trades’ instrument becomes tradeable
 	case closeWhenTradeable = "CLOSE_WHEN_TRADEABLE"
+	/// The Trades that are in any of the possible states listed above.
 	case all = "ALL"
 }
 
@@ -146,12 +144,11 @@ public struct CalculatedTradeState: Codable {
 }
 
 /// The classification of TradePLs.
-///
-/// - positive: An open Trade currently has a positive (profitable) unrealized P/L, or a closed Trade realized a positive amount of P/L.
-/// - negative: An open Trade currently has a negative (losing) unrealized P/L, or a closed Trade realized a negative amount of P/L.
-/// - zero: An open Trade currently has unrealized P/L of zero (neither profitable nor losing), or a closed Trade realized a P/L amount of zero.
 public enum TradePL: String, Codable {
+	/// An open Trade currently has a positive (profitable) unrealized P/L, or a closed Trade realized a positive amount of P/L.
 	case positive = "POSITIVE"
+	/// An open Trade currently has a negative (losing) unrealized P/L, or a closed Trade realized a negative amount of P/L.
 	case negative = "NEGATIVE"
+	/// An open Trade currently has unrealized P/L of zero (neither profitable nor losing), or a closed Trade realized a P/L amount of zero.
 	case zero = "ZERO"
 }

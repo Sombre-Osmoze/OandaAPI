@@ -41,6 +41,8 @@ public struct Transaction: Codable {
 /// Tags are typically used to associate groups of Trades and/or Orders together.
 public typealias ClientID = String
 
+// MARK: Transaction-related Definitions
+
 /// The unique Transaction identifier within each Account.
 public typealias TransactionID = String
 
@@ -65,7 +67,40 @@ public struct ClientExtensions : Codable {
 
 	/// A comment associated with the Order/Trade
 	public let comment : ClientComment
+
+	public init(id: ClientID, tag: ClientTag, comment: ClientComment) {
+		self.id = id
+		self.tag = tag
+		self.comment = comment
+	}
+}
+
+/// TakeProfitDetails specifies the details of a Take Profit Order to be created on behalf of a client.
+/// This may happen when an Order is filled that opens a Trade requiring a Take Profit, or when a Trade’s dependent Take Profit Order is modified directly through the Trade.
+public struct TakeProfitDetails: Codable {
+
+	/// The price that the Take Profit Order will be triggered at.
+	/// Only one of the price and distance fields may be specified.
+	public let price : PriceValue
+
+	/// The time in force for the created Take Profit Order.
+	/// This may only be GTC, GTD or GFD.
+	public let timeInForce : TimeInForce
+
+	/// The date when the Take Profit Order will be cancelled on if timeInForce is GTD.
+	public let gtdTime : DateTime?
+
+	/// The Client Extensions to add to the Take Profit Order when created.
+	public let clientExtensions : ClientExtensions
+
+	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions) {
+		self.price = price
+		self.timeInForce = time
+		self.gtdTime = time == .gtd ? date : nil
+		self.clientExtensions = extensions
+	}
 }
 
 /// The request identifier.
 public typealias RequestID = String
+

@@ -135,6 +135,20 @@ public enum OrderState : String, Codable {
 	case cancelled = "CANCELLED"
 }
 
+/// The time-in-force of an Order. TimeInForce describes how long an Order should remain pending before being automatically cancelled by the execution system.
+public enum TimeInForce: String, Codable {
+	/// The Order is “Good unTil Cancelled”
+	case gtc = "GTC"
+	/// The Order is “Good unTil Date” and will be cancelled at the provided time
+	case gtd = "GTD"
+	/// The Order is “Good For Day” and will be cancelled at 5pm New York time
+	case gfd = "GFD"
+	/// The Order must be immediately “Filled Or Killed”
+	case fok = "FOK"
+	/// The Order must be “Immediatedly paritally filled Or Cancelled”
+	case ioc = "IOC"
+}
+
 /// The dynamic state of an Order.
 /// This is only relevant to TrailingStopLoss Orders, as no other Order type has dynamic state.
 public struct DynamicOrderState: Codable {

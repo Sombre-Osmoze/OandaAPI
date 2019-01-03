@@ -50,8 +50,28 @@ public struct Oanda {
 		case accounts
 		case pricing
 
-		public enum Stream {
+		enum Stream {
 			case pricing
+		}
+
+		/// Trade Endpoints
+		enum Trade {
+			/// Get a list of Trades for an Account
+			case trades
+			/// Get the list of open Trades for an Account
+			case openTrades
+
+			enum TradeSpecifier {
+				/// Get the details of a specific Trade in an Account
+				case tradeSpecifier
+				/// Close (partially or fully) a specific open Trade in an Account
+				case close
+				/// Update the Client Extensions for a Trade.
+				/// Do not add, update, or delete the Client Extensions if your account is associated with MT4.
+				case clientExtentions
+				/// Create, replace and cancel a Trade’s dependent Orders (Take Profit, Stop Loss and Trailing Stop Loss) through the Trade itself
+				case orders
+			}
 		}
 
 		enum Account {
@@ -140,6 +160,23 @@ public struct Oanda {
 			return URL(string: main() + version + accounts + account + "/" + summary)!
 		}
 
+	}
+
+	func endpoint(url type: EndpointsURL.Trade, param: String) -> URL {
+
+		switch type {
+		case .trades:
+			return URL(string: main() + version + accounts + account + "/trades?" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+		case .openTrades:
+			return URL(string: main() + version + accounts + account + "/openTrades?" + param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+		}
+	}
+
+	func endpoint(url type: EndpointsURL.Trade.TradeSpecifier, trade specifier: TradeSpecifier) -> URL {
+		switch type {
+		default:
+			return URL(string: main() + version + accounts + account + "/trades" + specifier)!
+		}
 	}
 
 	func endpoint(url type: EndpointsURL.Instrument, name: InstrumentName, param: String) -> URL {

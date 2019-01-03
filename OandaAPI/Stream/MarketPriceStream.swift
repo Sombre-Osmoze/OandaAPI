@@ -21,7 +21,7 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 
 	private var delegate : MarketPriceStreamDelegate?
 
-	private var session : URLSession = URLSession(configuration: .ephemeral)
+	private var session : URLSession { return URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue()) }
 	private let request : URLRequest
 
 	private let jsonDecoder : JSONDecoder
@@ -32,9 +32,7 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 		jsonDecoder = JSONDecoder()
 		jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
 		self.delegate = delegate
-
 		super.init()
-		self.session = .init(configuration: .default, delegate: self, delegateQueue: OperationQueue())
 		session.dataTask(with: request).resume()
 	}
 
