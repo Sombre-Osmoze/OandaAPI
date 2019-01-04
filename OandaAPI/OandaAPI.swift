@@ -73,6 +73,10 @@ public struct Oanda {
 				case orders
 			}
 		}
+		/// Order Endpoints
+		enum Order {
+			case orders
+		}
 
 		enum Account {
 			case id
@@ -139,6 +143,14 @@ public struct Oanda {
 			return URL(string: main() + version + accounts)!
 		case .pricing:
 			return URL(string: main() + version + accounts + account + "/" + pricing)!
+		}
+	}
+
+	func endpoint(url type: EndpointsURL.Order) -> URL {
+
+		switch type {
+		case .orders:
+			return URL(string: main() + version + accounts + account + "/orders")!
 		}
 	}
 

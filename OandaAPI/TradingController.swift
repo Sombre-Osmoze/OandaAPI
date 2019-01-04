@@ -42,6 +42,24 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		return request
 	}
 
+	func createOrder(order: OrderRequest) -> Void {
+
+		let encoder = JSONEncoder()
+		encoder.dateEncodingStrategy = .iso8601
+		var request = basiqueRequest(with: oandaURLS.endpoint(url: .orders), date: .rfc3339)
+		request.httpMethod = "POST"
+		if order.type == OrderType.market {
+			request.httpBody = try? encoder.encode(order as! MarketOrderRequest)
+		}
+
+		session.dataTask(with: request) { (data, response, error) in
+			print(response as! HTTPURLResponse)
+			print(String(data: data!, encoding: .utf8))
+			print(error)
+
+		}.resume()
+	}
+
 	public func getData(for query: InstrumentCandlesQuery,
 						completion handler: @escaping(_ data: InstrumentCandles?, _ error: Error?)->Void) -> Void {
 
@@ -92,6 +110,12 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 				}
 			}
 		}.resume()
+	}
+
+
+	public func testiong() -> Void {
+
+		
 	}
 
 	public class func checkAccounts(bearer token: String, demo: Bool, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {

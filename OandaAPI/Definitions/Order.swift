@@ -94,6 +94,68 @@ struct StopLossOrder : Codable, OrderBase {
 	public let tradeID : TradeID
 }
 
+// MARK: Order Requests
+// The request specification of all Orders supported by the platform.
+// These objects are used by the API client to create Orders on the platform.
+
+/// The base Order specification used when requesting that an Order be created.
+/// Each specific Order-type extends this definition.
+protocol OrderRequest {
+
+	/// The type of the Order to Create. Must be set to “MARKET” when creating a Market Order.
+	var type : OrderType { get }
+
+	/// The Market Order’s Instrument.
+	var instrument : InstrumentName { get }
+
+	/// The quantity requested to be filled by the Limit Order.
+	/// A posititive number of units results in a long Order, and a negative number of units results in a short Order.
+	var units : DecimalNumber { get }
+
+	/// The time-in-force requested for the Limit Order.
+	var timeInForce : TimeInForce { get }
+
+	/// The price threshold specified for the Limit Order.
+	/// The Limit Order will only be filled by a market price that is equal to or better than this price.
+	var price : PriceValue { get }
+}
+
+public struct MarketOrderRequest: Codable, OrderRequest {
+
+	/// The type of the Order to Create.
+	/// Must be set to “MARKET” when creating a Market Order.
+	public let type: OrderType = .market
+
+	public let instrument: InstrumentName
+
+	public let units: DecimalNumber
+
+	public let timeInForce: TimeInForce
+
+	public let price: PriceValue
+
+	/// The worst price that the client is willing to have the Market Order filled at.
+	public let  priceBound : PriceValue?
+
+	/// Specification of how Positions in the Account are modified when the Order is filled.
+	public let positionFill : OrderPositionFill
+
+	/// The client extensions to add to the Order. Do not set, modify, or delete clientExtensions if your account is associated with MT4.
+	public let clientExtensions : ClientExtensions?
+
+	/// TakeProfitDetails specifies the details of a Take Profit Order to be created on behalf of a client.
+	/// This may happen when an Order is filled that opens a Trade requiring a Take Profit, or when a Trade’s dependent Take Profit Order is modified directly through the Trade.
+	public let takeProfitOnFill : TakeProfitDetails?
+
+	/// StopLossDetails specifies the details of a Stop Loss Order to be created on behalf of a client.
+	//// This may happen when an Order is filled that opens a Trade requiring a Stop Loss, or when a Trade’s dependent Stop Loss Order is modified directly through the Trade.
+	public let stopLossOnFill : StopLossDetails?
+
+	/// Client Extensions to add to the Trade created when the Order is filled (if such a Trade is created).
+	/// Do not set, modify, or delete tradeClientExtensions if your account is associated with MT4.
+	public let tradeClientExtensions : ClientExtensions?
+}
+
 // MARK: Order-related Definitions
 
 /// The Order’s identifier, unique within the Order’s Account.
@@ -102,23 +164,22 @@ public typealias OrderID = String
 
 
 /// The type of the Order.
-///
-/// - market: A Market Order
-/// - limit: A Limit Orde
-/// - stop: A Stop Order
-/// - marketIfTouched: A Market-if-touched Order
-/// - takeProfit: A Take Profit Order
-/// - stopLoss: A Stop Loss Order
-/// - trailingStopLoss: A Trailing Stop Loss Order
-/// - fixedPrice: A Fixed Price Order
 public enum OrderType : String, Codable {
+	/// A Market Order
 	case market = "MARKET"
+	/// A Limit Order
 	case limit = "LIMIT"
+	/// A Stop Order
 	case stop = "STOP"
+	/// A Market-if-touched Order
 	case marketIfTouched = "MARKET_IF_TOUCHED"
+	/// A Take Profit Order
 	case takeProfit = "TAKE_PROFIT"
+	/// A Stop Loss Order
 	case stopLoss = "STOP_LOSS"
+	/// A Trailing Stop Loss Order
 	case trailingStopLoss = "TRAILING_STOP_LOSS"
+	/// A Fixed Price Order
 	case fixedPrice = "FIXED_PRICE"
 }
 
@@ -147,6 +208,18 @@ public enum TimeInForce: String, Codable {
 	case fok = "FOK"
 	/// The Order must be “Immediatedly paritally filled Or Cancelled”
 	case ioc = "IOC"
+}
+
+/// Specification of how Positions in the Account are modified when the Order is filled.
+public enum OrderPositionFill: String, Codable {
+	/// When the Order is filled, always fully reduce an existing Position before opening a new Position.
+	case openOnly = "OPEN_ONLY"
+	/// When the Order is filled, always fully reduce an existing Position before opening a new Position.
+	case reduceFirst = "REDUCE_FIRST"
+	/// When the Order is filled, only reduce an existing Position.
+	case reduceOnly = "REDUCE_ONLY"
+	/// When the Order is filled, use REDUCE_FIRST behaviour for non-client hedging Accounts, and OPEN_ONLY behaviour for client hedging Accounts.
+	case defaultFill = "DEFAULT"
 }
 
 /// The dynamic state of an Order.

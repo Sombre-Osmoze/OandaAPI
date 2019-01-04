@@ -101,6 +101,64 @@ public struct TakeProfitDetails: Codable {
 	}
 }
 
+/// StopLossDetails specifies the details of a Stop Loss Order to be created on behalf of a client.
+/// This may happen when an Order is filled that opens a Trade requiring a Stop Loss, or when a Trade’s dependent Stop Loss Order is modified directly through the Trade.
+public struct StopLossDetails: Codable {
+
+	/// The price that the Take Profit Order will be triggered at.
+	/// Only one of the price and distance fields may be specified.
+	public let price : PriceValue
+
+	/// The time in force for the created Take Profit Order.
+	/// This may only be GTC, GTD or GFD.
+	public let timeInForce : TimeInForce
+
+	/// The date when the Take Profit Order will be cancelled on if timeInForce is GTD.
+	public let gtdTime : DateTime?
+
+	/// The Client Extensions to add to the Take Profit Order when created.
+	public let clientExtensions : ClientExtensions
+
+	/// Flag indicating that the price for the Stop Loss Order is guaranteed.
+	/// The default value depends on the GuaranteedStopLossOrderMode of the account, if it is REQUIRED, the default will be true, for DISABLED or ENABLED thedefault is false.
+	public let guaranteed : Bool
+
+	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions,
+				guaranteed mode: GuaranteedStopLossOrderMode) {
+		self.price = price
+		self.timeInForce = time
+		self.gtdTime = time == .gtd ? date : nil
+		self.clientExtensions = extensions
+		self.guaranteed = mode == .required
+	}
+}
+
+/// TrailingStopLossDetails specifies the details of a Trailing Stop Loss Order to be created on behalf of a client.
+/// This may happen when an Order is filled that opens a Trade requiring a Trailing Stop Loss, or when a Trade’s dependent Trailing Stop Loss Order is modified directly through the Trade.
+public struct TrailingStopLossDetails: Codable {
+
+	/// The distance (in price units) from the Trade’s fill price that the Trailing Stop Loss Order will be triggered at.
+	public let distance : DecimalNumber
+
+	/// The time in force for the created Take Profit Order.
+	/// This may only be GTC, GTD or GFD.
+	public let timeInForce : TimeInForce
+
+	/// The date when the Take Profit Order will be cancelled on if timeInForce is GTD.
+	public let gtdTime : DateTime?
+
+	/// The Client Extensions to add to the Take Profit Order when created.
+	public let clientExtensions : ClientExtensions
+
+	public init(_ distance: DecimalNumber, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions) {
+		self.distance = distance
+		self.timeInForce = time
+		self.gtdTime = time == .gtd ? date : nil
+		self.clientExtensions = extensions
+	}
+}
+
+
 /// The request identifier.
 public typealias RequestID = String
 
