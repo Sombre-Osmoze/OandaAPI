@@ -91,9 +91,9 @@ public struct TakeProfitDetails: Codable {
 	public let gtdTime : DateTime?
 
 	/// The Client Extensions to add to the Take Profit Order when created.
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
-	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions) {
+	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions?) {
 		self.price = price
 		self.timeInForce = time
 		self.gtdTime = time == .gtd ? date : nil
@@ -117,13 +117,13 @@ public struct StopLossDetails: Codable {
 	public let gtdTime : DateTime?
 
 	/// The Client Extensions to add to the Take Profit Order when created.
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// Flag indicating that the price for the Stop Loss Order is guaranteed.
 	/// The default value depends on the GuaranteedStopLossOrderMode of the account, if it is REQUIRED, the default will be true, for DISABLED or ENABLED thedefault is false.
 	public let guaranteed : Bool
 
-	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions,
+	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions?,
 				guaranteed mode: GuaranteedStopLossOrderMode) {
 		self.price = price
 		self.timeInForce = time

@@ -13,21 +13,9 @@ public enum Pairs: String, Codable {
 	case gbp = "GBP"
 	case usd = "USD"
 	case jpy = "JPY"
+	case aud = "AUD"
 }
 
-
-extension InstrumentName {
-
-	public init(_ buy: Pairs, _ sell: Pairs) {
-		self = buy.rawValue + "_" + sell.rawValue
-	}
-
-	public func pair() -> (Pairs , Pairs) {
-		let pairs = self.split(separator: "_")
-		return (Pairs(rawValue: String(pairs.first!))!, Pairs(rawValue: String(pairs.last!))!)
-	}
-
-}
 
 /// You can use this structure for all oanda infomations
 public struct Oanda {
@@ -123,7 +111,6 @@ public struct Oanda {
 		}
 		isPractice = demo
 	}
-
 
 	private func main(_ stream: Bool = false) -> String {
 		if stream {

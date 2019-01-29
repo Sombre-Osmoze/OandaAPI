@@ -67,49 +67,48 @@ public struct InstrumentCandlesQuery {
 // MARK: Instrument Definitions
 
 /// The granularity of a candlestick
-///
-/// - s5: 5 second candlesticks, minute alignment
-/// - s10: 10 second candlesticks, minute alignment
-/// - s15: 15 second candlesticks, minute alignment
-/// - s30: 30 second candlesticks, minute alignment
-/// - m1: 1 minute candlesticks, minute alignment
-/// - m2: 2 minute candlesticks, hour alignment
-/// - m4: 4 minute candlesticks, hour alignment
-/// - m5: 5 minute candlesticks, hour alignment
-/// - m10: 10 minute candlesticks, hour alignment
-/// - m15: 15 minute candlesticks, hour alignment
-/// - m30: 30 minute candlesticks, hour alignment
-/// - h1: 1 hour candlesticks, hour alignment
-/// - h2: 2 hour candlesticks, day alignment
-/// - h3: 3 hour candlesticks, day alignment
-/// - h4: 4 hour candlesticks, day alignment
-/// - h6: 6 hour candlesticks, day alignment
-/// - h8: 8 hour candlesticks, day alignment
-/// - h12: 12 hour candlesticks, day alignment
-/// - d: 1 day candlesticks, day alignment
-/// - w: 1 week candlesticks, aligned to start of week
-/// - m: 1 month candlesticks, aligned to first day of the month
 public enum CandlestickGranularity: String, Codable {
+	/// 5 second candlesticks, minute alignment
 	case s5 = "S5"
+	/// 10 second candlesticks, minute alignment
 	case s10 = "S10"
+	/// 15 second candlesticks, minute alignment
 	case s15 = "S15"
+	/// 30 second candlesticks, minute alignment
 	case s30 = "S30"
+	/// 1 minute candlesticks, minute alignment
 	case m1 = "M1"
+	/// 2 minute candlesticks, hour alignment
 	case m2 = "M2"
+	/// 4 minute candlesticks, hour alignment
 	case m4 = "M4"
+	/// 5 minute candlesticks, hour alignment
 	case m5 = "M5"
+	/// 10 minute candlesticks, hour alignment
 	case m10 = "M10"
+	/// 15 minute candlesticks, hour alignment
 	case m15 = "M15"
+	/// 30 minute candlesticks, hour alignment
 	case m30 = "M30"
+	/// 1 hour candlesticks, hour alignment
 	case h1 = "H1"
+	/// 2 hour candlesticks, day alignment
 	case h2 = "H2"
+	/// 3 hour candlesticks, day alignment
 	case h3 = "H3"
+	/// 4 hour candlesticks, day alignment
 	case h4 = "H4"
+	/// 6 hour candlesticks, day alignment
 	case h6 = "H6"
+	/// 8 hour candlesticks, day alignment
 	case h8 = "H8"
+	/// 12 hour candlesticks, day alignment
 	case h12 = "H12"
+	/// 1 day candlesticks, day alignment
 	case d = "D"
+	/// 1 week candlesticks, aligned to start of week
 	case w = "W"
+	/// 1 month candlesticks, aligned to first day of the month
 	case m = "M"
 }
 

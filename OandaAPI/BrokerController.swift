@@ -1,5 +1,5 @@
 //
-//  TradingController.swift
+//  BrokerController.swift
 //  Forex Prediction
 //
 //  Created by Marcus Florentin on 22/11/2018.
@@ -7,31 +7,44 @@
 //
 
 import Foundation
+import os.log
 
-open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate {
+open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate {
+
+	private let logs = DefaultLogging()
 
 	public let oandaURLS : Oanda
 
-	private var streamSession : URLSession
-	private var session : URLSession
+	private var streamSession : URLSession { return .init(configuration: .default, delegate: self, delegateQueue: .init()) }
+	private var session : URLSession { return .init(configuration: .default, delegate: self, delegateQueue: .init()) }
 
 	private let credential : URLCredential
 	private var streamTasks : [URLSessionTask] = []
 
 	private let jsonDecoder : JSONDecoder
 
+
+	public init?(demo: Bool) {
+
+		let creds = URLCredentialStorage.shared.allCredentials.first?.value.first?.value
+		if let cred = creds, cred.user != nil, cred.hasPassword {
+			oandaURLS = .init(with: cred.user!, is: demo)
+			credential = cred
+			jsonDecoder = JSONDecoder()
+			jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
+			super.init()
+			logs.print("Log in account %s", cred.user!)
+		}
+		return nil
+	}
+
 	public init(with credentials: URLCredential, is practice: Bool) {
 		oandaURLS = .init(with: credentials.user!, is: practice)
 		credential = credentials
 		jsonDecoder = JSONDecoder()
 		jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
-
-		session = .init(configuration: .ephemeral)
-		streamSession = .init(configuration: .ephemeral)
 		super.init()
-		let ope = OperationQueue()
-		session = .init(configuration: .default, delegate: self, delegateQueue: ope)
-		streamSession = .init(configuration: .default, delegate: self, delegateQueue: ope)
+		URLCredentialStorage.shared.set(credential, for: oandaURLS.restSpace)
 	}
 
 	private func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
@@ -42,21 +55,23 @@ open class TradingController: NSObject, URLSessionDelegate, URLSessionTaskDelega
 		return request
 	}
 
-	func createOrder(order: OrderRequest) -> Void {
+	public func createOrder(order: OrderRequest, completion handler: @escaping()->Void) -> Void {
 
 		let encoder = JSONEncoder()
 		encoder.dateEncodingStrategy = .iso8601
 		var request = basiqueRequest(with: oandaURLS.endpoint(url: .orders), date: .rfc3339)
 		request.httpMethod = "POST"
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
 		if order.type == OrderType.market {
-			request.httpBody = try? encoder.encode(order as! MarketOrderRequest)
+			request.httpBody = try? encoder.encode(["order" : order as! MarketOrderRequest])
 		}
 
 		session.dataTask(with: request) { (data, response, error) in
-			print(response as! HTTPURLResponse)
+
 			print(String(data: data!, encoding: .utf8))
 			print(error)
-
+			handler()
 		}.resume()
 	}
 

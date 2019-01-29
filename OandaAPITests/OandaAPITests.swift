@@ -11,6 +11,10 @@ import XCTest
 
 class OandaAPITests: XCTestCase {
 
+	let controller = BrokerController(with: URLCredential(user: "101-004-9871381-001",
+														   password: "eb06a0b15a3ec7a1fd845e85d5acf7a6-2789af34820bda6e52f7628234c79b85",
+														   persistence: .none), is: true)
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -19,29 +23,23 @@ class OandaAPITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-	func testAccountFectching() {
+	func testCreateRequest() {
 
-//		let tradeCtrl = TradingController()
-//
-//		tradeCtrl.checkAccounts(bearer: "04af41b186d7c8576f935ebfc9817d48-4d09e0a83ec3b6bbbd7eeff692d11613") { (subAccounts, error) in
-//
-//			XCTAssertGreaterThanOrEqual(subAccounts.count, 1)
-//		}
+		var order = MarketOrderRequest(InstrumentName(.eur, .jpy), units: "1000", price: nil)
 
+		order.stopLossOnFill = StopLossDetails("124.59", date: nil, client: nil, guaranteed: .required)
+
+
+
+		let exp = expectation(description: "OrderCreation")
+		controller.createOrder(order: order) {
+			exp.fulfill()
+
+		}
+
+		waitForExpectations(timeout: 10, handler: nil)
 	}
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
 
-//			let tradeCtrl = TradingController()
-//
-//			tradeCtrl.checkAccounts(bearer: "04af41b186d7c8576f935ebfc9817d48-4d09e0a83ec3b6bbbd7eeff692d11613") { (subAccounts, error) in
-//
-//				XCTAssertGreaterThanOrEqual(subAccounts.count, 1)
-//			}
-        }
-    }
 
 }

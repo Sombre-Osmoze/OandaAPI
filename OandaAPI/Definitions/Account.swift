@@ -56,13 +56,13 @@ public struct Account : Codable {
 	/// The total profit/loss realized over the lifetime of the Account
 	public let pl : AccountUnits
 
-	/// The date/time that the Account’s resettablePL was last reset.
+	/// The total realized profit/loss for the Account since it was last reset by the client.
 	public let resettablePL : AccountUnits
 
-	/// The total realized profit/loss for the Account since it was last reset by the client.
-	public let resettablePLTime : String
+	/// The date/time that the Account’s resettablePL was last reset.
+	public let resettablePLTime : DateTime
 
-	/// The total amount of commission paid over the lifetime of the Account.
+	/// The total amount of financing paid/collected over the lifetime of the Account.
 	public let financing : AccountUnits
 
 	/// The total amount of commission paid over the lifetime of the Account.
@@ -226,13 +226,12 @@ struct AccountProperties: Codable {
 
 
 /// The overall behaviour of the Account regarding guaranteed Stop Loss Orders.
-///
-/// - disable: The Account is not permitted to create guaranteed Stop Loss Order
-/// - allowed: The Account is able, but not required to have guaranteed Stop Loss Orders for open Trades
-/// - required: The Account is required to have guaranteed Stop Loss Orders for all open Trades.
 public enum GuaranteedStopLossOrderMode: String, Codable {
+	/// The Account is not permitted to create guaranteed Stop Loss Order
 	case disable = "DISABLED"
+	/// The Account is able, but not required to have guaranteed Stop Loss Orders for open Trades
 	case allowed = "ALLOWED"
+	/// The Account is required to have guaranteed Stop Loss Orders for all open Trades.
 	case required = "REQUIRED"
 }
 

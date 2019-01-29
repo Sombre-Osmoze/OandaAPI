@@ -94,13 +94,14 @@ struct StopLossOrder : Codable, OrderBase {
 	public let tradeID : TradeID
 }
 
+
 // MARK: Order Requests
 // The request specification of all Orders supported by the platform.
 // These objects are used by the API client to create Orders on the platform.
 
 /// The base Order specification used when requesting that an Order be created.
 /// Each specific Order-type extends this definition.
-protocol OrderRequest {
+public protocol OrderRequest {
 
 	/// The type of the Order to Create. Must be set to “MARKET” when creating a Market Order.
 	var type : OrderType { get }
@@ -117,49 +118,55 @@ protocol OrderRequest {
 
 	/// The price threshold specified for the Limit Order.
 	/// The Limit Order will only be filled by a market price that is equal to or better than this price.
-	var price : PriceValue { get }
+	var price : PriceValue? { get }
 }
 
-public struct MarketOrderRequest: Codable, OrderRequest {
+public class MarketOrderRequest: Codable, OrderRequest {
 
-	/// The type of the Order to Create.
-	/// Must be set to “MARKET” when creating a Market Order.
 	public let type: OrderType = .market
 
 	public let instrument: InstrumentName
 
 	public let units: DecimalNumber
 
-	public let timeInForce: TimeInForce
+	public let timeInForce: TimeInForce = .fok
 
-	public let price: PriceValue
+	public let price: PriceValue?
 
 	/// The worst price that the client is willing to have the Market Order filled at.
-	public let  priceBound : PriceValue?
+	public var  priceBound : PriceValue? = nil
 
 	/// Specification of how Positions in the Account are modified when the Order is filled.
-	public let positionFill : OrderPositionFill
+	public var positionFill : OrderPositionFill = .defaultFill
 
 	/// The client extensions to add to the Order. Do not set, modify, or delete clientExtensions if your account is associated with MT4.
-	public let clientExtensions : ClientExtensions?
+	public var clientExtensions : ClientExtensions? = nil
 
 	/// TakeProfitDetails specifies the details of a Take Profit Order to be created on behalf of a client.
 	/// This may happen when an Order is filled that opens a Trade requiring a Take Profit, or when a Trade’s dependent Take Profit Order is modified directly through the Trade.
-	public let takeProfitOnFill : TakeProfitDetails?
+	public var takeProfitOnFill : TakeProfitDetails? = nil
 
 	/// StopLossDetails specifies the details of a Stop Loss Order to be created on behalf of a client.
 	//// This may happen when an Order is filled that opens a Trade requiring a Stop Loss, or when a Trade’s dependent Stop Loss Order is modified directly through the Trade.
-	public let stopLossOnFill : StopLossDetails?
+	public var stopLossOnFill : StopLossDetails? = nil
 
 	/// Client Extensions to add to the Trade created when the Order is filled (if such a Trade is created).
 	/// Do not set, modify, or delete tradeClientExtensions if your account is associated with MT4.
-	public let tradeClientExtensions : ClientExtensions?
+	public let tradeClientExtensions : ClientExtensions? = nil
+
+	public init(_ instrument: InstrumentName, units: DecimalNumber, price: PriceValue?) {
+		self.instrument = instrument
+		self.units = units
+		self.price = price
+	}
+
 }
 
 // MARK: Order-related Definitions
 
 /// The Order’s identifier, unique within the Order’s Account.
-/// The string representation of the OANDA-assigned OrderID. OANDA-assigned OrderIDs are positive integers, and are derived from the TransactionID of the Transaction that created the Order.
+/// The string representation of the OANDA-assigned OrderID.
+/// OANDA-assigned OrderIDs are positive integers, and are derived from the TransactionID of the Transaction that created the Order.
 public typealias OrderID = String
 
 

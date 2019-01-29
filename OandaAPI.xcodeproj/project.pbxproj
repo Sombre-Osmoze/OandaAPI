@@ -7,62 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED4CC7FE21B9C875003DF146 /* TradingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5621AE13790097A075 /* TradingController.swift */; };
-		ED4CC7FF21B9C877003DF146 /* OandaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5421AE13790097A075 /* OandaAPI.swift */; };
-		ED4CC80021B9C886003DF146 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5521AE13790097A075 /* Account.swift */; };
-		ED4CC80121B9C886003DF146 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB121AE2D2A0097A075 /* Instrument.swift */; };
-		ED4CC80221B9C886003DF146 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FC021AF0FD30097A075 /* Order.swift */; };
-		ED4CC80321B9C886003DF146 /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5721AE13790097A075 /* Trade.swift */; };
-		ED4CC80421B9C886003DF146 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FD621AF4C220097A075 /* Position.swift */; };
-		ED4CC80521B9C886003DF146 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FBD21AF06FF0097A075 /* Transaction.swift */; };
-		ED4CC80621B9C886003DF146 /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB521AE2DF10097A075 /* Pricing.swift */; };
-		ED4CC80721B9C886003DF146 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB821AE30630097A075 /* Primitives.swift */; };
-		ED4CC81021B9C966003DF146 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED3EB27121F0CCA8002B9F4D /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3EB27021F0CCA8002B9F4D /* Default.swift */; };
 		ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
-		ED7B747F21C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
-		ED7B748021C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
 		ED94F8E021B3CB700011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
-		ED94F8E121B3CB790011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
-		EDDBDFDF21B9E1060066E185 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDBDFDE21B9E1060066E185 /* Foundation.framework */; };
+		EDE0D59E21F6916000B9170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F6721AE17600097A075 /* Foundation.framework */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
-		EDFE8F8921AE27950097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDFE8F9721AE281F0097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EDFE8F9821AE283D0097A075 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5521AE13790097A075 /* Account.swift */; };
-		EDFE8F9921AE283D0097A075 /* OandaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5421AE13790097A075 /* OandaAPI.swift */; };
-		EDFE8F9A21AE283D0097A075 /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5721AE13790097A075 /* Trade.swift */; };
-		EDFE8F9B21AE283D0097A075 /* TradingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5621AE13790097A075 /* TradingController.swift */; };
 		EDFE8F9C21AE283E0097A075 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5521AE13790097A075 /* Account.swift */; };
 		EDFE8F9D21AE283E0097A075 /* OandaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5421AE13790097A075 /* OandaAPI.swift */; };
 		EDFE8F9E21AE283E0097A075 /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5721AE13790097A075 /* Trade.swift */; };
-		EDFE8F9F21AE283E0097A075 /* TradingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5621AE13790097A075 /* TradingController.swift */; };
-		EDFE8FA021AE28500097A075 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F6721AE17600097A075 /* Foundation.framework */; };
-		EDFE8FA221AE28590097A075 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8FA121AE28590097A075 /* Foundation.framework */; };
+		EDFE8F9F21AE283E0097A075 /* BrokerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5621AE13790097A075 /* BrokerController.swift */; };
 		EDFE8FA821AE29090097A075 /* OandaAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F8F21AE27D00097A075 /* OandaAPI.framework */; };
 		EDFE8FB221AE2D2A0097A075 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB121AE2D2A0097A075 /* Instrument.swift */; };
-		EDFE8FB321AE2D2A0097A075 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB121AE2D2A0097A075 /* Instrument.swift */; };
 		EDFE8FB621AE2DF10097A075 /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB521AE2DF10097A075 /* Pricing.swift */; };
-		EDFE8FB721AE2DF10097A075 /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB521AE2DF10097A075 /* Pricing.swift */; };
 		EDFE8FB921AE30630097A075 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB821AE30630097A075 /* Primitives.swift */; };
-		EDFE8FBA21AE30630097A075 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FB821AE30630097A075 /* Primitives.swift */; };
 		EDFE8FBE21AF06FF0097A075 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FBD21AF06FF0097A075 /* Transaction.swift */; };
-		EDFE8FBF21AF06FF0097A075 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FBD21AF06FF0097A075 /* Transaction.swift */; };
 		EDFE8FC121AF0FD30097A075 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FC021AF0FD30097A075 /* Order.swift */; };
-		EDFE8FC221AF0FD30097A075 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FC021AF0FD30097A075 /* Order.swift */; };
 		EDFE8FCA21AF1CF20097A075 /* DefinitionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FC921AF1CF20097A075 /* DefinitionsTests.swift */; };
 		EDFE8FCC21AF1CF20097A075 /* OandaAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F8F21AE27D00097A075 /* OandaAPI.framework */; };
 		EDFE8FD321AF1D340097A075 /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FD221AF1D340097A075 /* AccountTests.swift */; };
 		EDFE8FD721AF4C220097A075 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FD621AF4C220097A075 /* Position.swift */; };
-		EDFE8FD821AF4C220097A075 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8FD621AF4C220097A075 /* Position.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EDFE8FA321AE28FA0097A075 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EDFE8F3121AE134B0097A075 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EDFE8F7C21AE262A0097A075;
-			remoteInfo = OandaAPI_iOS;
-		};
 		EDFE8FA521AE28FA0097A075 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EDFE8F3121AE134B0097A075 /* Project object */;
@@ -77,17 +44,10 @@
 			remoteGlobalIDString = EDFE8F8E21AE27D00097A075;
 			remoteInfo = OandaAPI;
 		};
-		EDFE8FD421AF276C0097A075 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EDFE8F3121AE134B0097A075 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EDFE8F7C21AE262A0097A075;
-			remoteInfo = OandaAPI_iOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OandaAPI_WatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED3EB27021F0CCA8002B9F4D /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPriceStream.swift; sourceTree = "<group>"; };
 		ED94F8DF21B3CB5C0011F912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ED94F8E221B3CC8E0011F912 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
@@ -98,11 +58,10 @@
 		EDFE8F4A21AE134B0097A075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFE8F5421AE13790097A075 /* OandaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OandaAPI.swift; sourceTree = "<group>"; };
 		EDFE8F5521AE13790097A075 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		EDFE8F5621AE13790097A075 /* TradingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingController.swift; sourceTree = "<group>"; };
+		EDFE8F5621AE13790097A075 /* BrokerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerController.swift; sourceTree = "<group>"; };
 		EDFE8F5721AE13790097A075 /* Trade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		EDFE8F6721AE17600097A075 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OandaAPI.h; sourceTree = "<group>"; };
-		EDFE8F7D21AE262A0097A075 /* OandaAPI_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OandaAPI_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8F8F21AE27D00097A075 /* OandaAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OandaAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8FA121AE28590097A075 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		EDFE8FB121AE2D2A0097A075 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
@@ -118,14 +77,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		ED4CC7F321B9C861003DF146 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EDDBDFDF21B9E1060066E185 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EDFE8F4021AE134B0097A075 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,19 +85,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EDFE8F7A21AE262A0097A075 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EDFE8FA221AE28590097A075 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EDFE8F8C21AE27D00097A075 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDFE8FA021AE28500097A075 /* Foundation.framework in Frameworks */,
+				EDE0D59E21F6916000B9170B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED3EB26F21F0CC82002B9F4D /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				ED3EB27021F0CCA8002B9F4D /* Default.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		ED7B747C21C3377A00127E3E /* Stream */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,10 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				EDFE8F4321AE134B0097A075 /* OandaAPITests.xctest */,
-				EDFE8F7D21AE262A0097A075 /* OandaAPI_iOS.framework */,
 				EDFE8F8F21AE27D00097A075 /* OandaAPI.framework */,
 				EDFE8FC721AF1CF20097A075 /* DefinitionsTests.xctest */,
-				ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,8 +148,9 @@
 			children = (
 				EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */,
 				EDFE8F3E21AE134B0097A075 /* Info.plist */,
-				EDFE8F5621AE13790097A075 /* TradingController.swift */,
+				EDFE8F5621AE13790097A075 /* BrokerController.swift */,
 				EDFE8F5421AE13790097A075 /* OandaAPI.swift */,
+				ED3EB26F21F0CC82002B9F4D /* Logging */,
 				ED7B747C21C3377A00127E3E /* Stream */,
 				EDFE8FB421AE2D340097A075 /* Definitions */,
 			);
@@ -254,22 +204,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		ED4CC7F121B9C861003DF146 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ED4CC81021B9C966003DF146 /* OandaAPI.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EDFE8F7821AE262A0097A075 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EDFE8F8921AE27950097A075 /* OandaAPI.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EDFE8F8A21AE27D00097A075 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,24 +215,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		ED4CC7F521B9C861003DF146 /* OandaAPI_WatchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ED4CC7FD21B9C861003DF146 /* Build configuration list for PBXNativeTarget "OandaAPI_WatchOS" */;
-			buildPhases = (
-				ED4CC7F121B9C861003DF146 /* Headers */,
-				ED4CC7F221B9C861003DF146 /* Sources */,
-				ED4CC7F321B9C861003DF146 /* Frameworks */,
-				ED4CC7F421B9C861003DF146 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OandaAPI_WatchOS;
-			productName = OandaAPI_WatchOS;
-			productReference = ED4CC7F621B9C861003DF146 /* OandaAPI_WatchOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		EDFE8F4221AE134B0097A075 /* OandaAPITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDFE8F5121AE134B0097A075 /* Build configuration list for PBXNativeTarget "OandaAPITests" */;
@@ -310,31 +226,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				EDFE8FA421AE28FA0097A075 /* PBXTargetDependency */,
 				EDFE8FA621AE28FA0097A075 /* PBXTargetDependency */,
 			);
 			name = OandaAPITests;
 			productName = OandaAPITests;
 			productReference = EDFE8F4321AE134B0097A075 /* OandaAPITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		EDFE8F7C21AE262A0097A075 /* OandaAPI_iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EDFE8F8221AE262A0097A075 /* Build configuration list for PBXNativeTarget "OandaAPI_iOS" */;
-			buildPhases = (
-				EDFE8F7821AE262A0097A075 /* Headers */,
-				EDFE8F7921AE262A0097A075 /* Sources */,
-				EDFE8F7A21AE262A0097A075 /* Frameworks */,
-				EDFE8F7B21AE262A0097A075 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OandaAPI_iOS;
-			productName = OandaAPI_iOS;
-			productReference = EDFE8F7D21AE262A0097A075 /* OandaAPI_iOS.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		EDFE8F8E21AE27D00097A075 /* OandaAPI */ = {
 			isa = PBXNativeTarget;
@@ -366,7 +263,6 @@
 			);
 			dependencies = (
 				EDFE8FCE21AF1CF20097A075 /* PBXTargetDependency */,
-				EDFE8FD521AF276C0097A075 /* PBXTargetDependency */,
 			);
 			name = DefinitionsTests;
 			productName = DefinitionsTests;
@@ -383,13 +279,7 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Marcus Florentin";
 				TargetAttributes = {
-					ED4CC7F521B9C861003DF146 = {
-						CreatedOnToolsVersion = 10.1;
-					};
 					EDFE8F4221AE134B0097A075 = {
-						CreatedOnToolsVersion = 10.1;
-					};
-					EDFE8F7C21AE262A0097A075 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 					EDFE8F8E21AE27D00097A075 = {
@@ -413,8 +303,6 @@
 			projectRoot = "";
 			targets = (
 				EDFE8F8E21AE27D00097A075 /* OandaAPI */,
-				EDFE8F7C21AE262A0097A075 /* OandaAPI_iOS */,
-				ED4CC7F521B9C861003DF146 /* OandaAPI_WatchOS */,
 				EDFE8F4221AE134B0097A075 /* OandaAPITests */,
 				EDFE8FC621AF1CF20097A075 /* DefinitionsTests */,
 			);
@@ -422,25 +310,10 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		ED4CC7F421B9C861003DF146 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EDFE8F4121AE134B0097A075 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EDFE8F7B21AE262A0097A075 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ED94F8E121B3CB790011F912 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,24 +335,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		ED4CC7F221B9C861003DF146 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ED4CC80021B9C886003DF146 /* Account.swift in Sources */,
-				ED4CC80121B9C886003DF146 /* Instrument.swift in Sources */,
-				ED4CC80221B9C886003DF146 /* Order.swift in Sources */,
-				ED4CC80321B9C886003DF146 /* Trade.swift in Sources */,
-				ED4CC80421B9C886003DF146 /* Position.swift in Sources */,
-				ED7B748021C337AB00127E3E /* MarketPriceStream.swift in Sources */,
-				ED4CC80521B9C886003DF146 /* Transaction.swift in Sources */,
-				ED4CC80621B9C886003DF146 /* Pricing.swift in Sources */,
-				ED4CC80721B9C886003DF146 /* Primitives.swift in Sources */,
-				ED4CC7FE21B9C875003DF146 /* TradingController.swift in Sources */,
-				ED4CC7FF21B9C877003DF146 /* OandaAPI.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EDFE8F3F21AE134B0097A075 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,29 +343,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EDFE8F7921AE262A0097A075 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EDFE8FB721AE2DF10097A075 /* Pricing.swift in Sources */,
-				EDFE8FB321AE2D2A0097A075 /* Instrument.swift in Sources */,
-				EDFE8FBF21AF06FF0097A075 /* Transaction.swift in Sources */,
-				EDFE8FC221AF0FD30097A075 /* Order.swift in Sources */,
-				EDFE8F9921AE283D0097A075 /* OandaAPI.swift in Sources */,
-				ED7B747F21C337AB00127E3E /* MarketPriceStream.swift in Sources */,
-				EDFE8F9A21AE283D0097A075 /* Trade.swift in Sources */,
-				EDFE8F9821AE283D0097A075 /* Account.swift in Sources */,
-				EDFE8F9B21AE283D0097A075 /* TradingController.swift in Sources */,
-				EDFE8FD821AF4C220097A075 /* Position.swift in Sources */,
-				EDFE8FBA21AE30630097A075 /* Primitives.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EDFE8F8B21AE27D00097A075 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EDFE8FB621AE2DF10097A075 /* Pricing.swift in Sources */,
+				ED3EB27121F0CCA8002B9F4D /* Default.swift in Sources */,
 				EDFE8FB221AE2D2A0097A075 /* Instrument.swift in Sources */,
 				EDFE8FBE21AF06FF0097A075 /* Transaction.swift in Sources */,
 				EDFE8FC121AF0FD30097A075 /* Order.swift in Sources */,
@@ -518,7 +356,7 @@
 				ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */,
 				EDFE8F9E21AE283E0097A075 /* Trade.swift in Sources */,
 				EDFE8F9C21AE283E0097A075 /* Account.swift in Sources */,
-				EDFE8F9F21AE283E0097A075 /* TradingController.swift in Sources */,
+				EDFE8F9F21AE283E0097A075 /* BrokerController.swift in Sources */,
 				EDFE8FD721AF4C220097A075 /* Position.swift in Sources */,
 				EDFE8FB921AE30630097A075 /* Primitives.swift in Sources */,
 			);
@@ -536,11 +374,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EDFE8FA421AE28FA0097A075 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EDFE8F7C21AE262A0097A075 /* OandaAPI_iOS */;
-			targetProxy = EDFE8FA321AE28FA0097A075 /* PBXContainerItemProxy */;
-		};
 		EDFE8FA621AE28FA0097A075 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EDFE8F8E21AE27D00097A075 /* OandaAPI */;
@@ -551,71 +384,9 @@
 			target = EDFE8F8E21AE27D00097A075 /* OandaAPI */;
 			targetProxy = EDFE8FCD21AF1CF20097A075 /* PBXContainerItemProxy */;
 		};
-		EDFE8FD521AF276C0097A075 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EDFE8F7C21AE262A0097A075 /* OandaAPI_iOS */;
-			targetProxy = EDFE8FD421AF276C0097A075 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		ED4CC7FB21B9C861003DF146 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Z8Q82L44LS;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/OandaAPI/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-WatchOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.1;
-			};
-			name = Debug;
-		};
-		ED4CC7FC21B9C861003DF146 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Z8Q82L44LS;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/OandaAPI/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-WatchOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 5.1;
-			};
-			name = Release;
-		};
 		EDFE8F4C21AE134B0097A075 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -673,9 +444,11 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "macosx watchos iphoneos iphonesimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "i386 x86_64 arm64 arm64e armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -731,9 +504,11 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "macosx watchos iphoneos iphonesimulator";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALID_ARCHS = "i386 x86_64 arm64 arm64e armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -774,61 +549,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
-		EDFE8F8321AE262A0097A075 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Z8Q82L44LS;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/OandaAPI/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		EDFE8F8421AE262A0097A075 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Z8Q82L44LS;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/OandaAPI/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -925,15 +645,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED4CC7FD21B9C861003DF146 /* Build configuration list for PBXNativeTarget "OandaAPI_WatchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				ED4CC7FB21B9C861003DF146 /* Debug */,
-				ED4CC7FC21B9C861003DF146 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		EDFE8F3421AE134B0097A075 /* Build configuration list for PBXProject "OandaAPI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -948,15 +659,6 @@
 			buildConfigurations = (
 				EDFE8F5221AE134B0097A075 /* Debug */,
 				EDFE8F5321AE134B0097A075 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EDFE8F8221AE262A0097A075 /* Build configuration list for PBXNativeTarget "OandaAPI_iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EDFE8F8321AE262A0097A075 /* Debug */,
-				EDFE8F8421AE262A0097A075 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
