@@ -26,7 +26,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 	public init?(demo: Bool) {
 
-		let creds = URLCredentialStorage.shared.allCredentials.first?.value.first?.value
+		let creds = URLCredentialStorage.shared.defaultCredential(for: .init(host: "api-fxpractice.oanda.com", port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault))
 		if let cred = creds, cred.user != nil, cred.hasPassword {
 			oandaURLS = .init(with: cred.user!, is: demo)
 			credential = cred
@@ -34,8 +34,9 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 			jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
 			super.init()
 			logs.print("Log in account %s", cred.user!)
+		} else {
+			return nil
 		}
-		return nil
 	}
 
 	public init(with credentials: URLCredential, is practice: Bool) {
