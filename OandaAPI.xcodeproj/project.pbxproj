@@ -281,9 +281,11 @@
 				TargetAttributes = {
 					EDFE8F4221AE134B0097A075 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					EDFE8F8E21AE27D00097A075 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					EDFE8FC621AF1CF20097A075 = {
 						CreatedOnToolsVersion = 10.1;
@@ -529,7 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -548,7 +550,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -575,7 +577,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -602,7 +604,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
