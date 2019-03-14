@@ -122,6 +122,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 					let summary = try decoder.decode(AccountSummary.self, from: data!)
 					handler(summary, nil)
 				} catch let (parse) {
+					print(String(data: data!, encoding: .utf8))
 					handler(nil, parse)
 				}
 			}

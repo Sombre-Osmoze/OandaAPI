@@ -204,7 +204,7 @@ public struct Oanda {
 		format.calendar = Calendar(identifier: .iso8601)
 		format.locale = Locale(identifier: "en_US_POSIX")
 		format.timeZone = TimeZone.autoupdatingCurrent
-		format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+		format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXXX"
 		return format
 	}
 }
