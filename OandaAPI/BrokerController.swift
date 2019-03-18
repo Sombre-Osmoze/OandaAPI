@@ -117,12 +117,12 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 			if error == nil, data != nil {
 				let decoder = JSONDecoder()
-				decoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
+				decoder.dateDecodingStrategy = .millisecondsSince1970
 				do {
 					let summary = try decoder.decode(AccountSummary.self, from: data!)
 					handler(summary, nil)
 				} catch let (parse) {
-					print(String(data: data!, encoding: .utf8))
+
 					handler(nil, parse)
 				}
 			}

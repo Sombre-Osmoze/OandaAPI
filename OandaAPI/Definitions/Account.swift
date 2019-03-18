@@ -48,7 +48,7 @@ public struct Account : Codable {
 	public let createdByUserID : Int
 
 	/// The date/time when the Account was created.
-	public let createdTime : DateTime
+//	public let createdTime : DateTime
 
 	/// The current guaranteed Stop Loss Order mode of the Account.
 	public let guaranteedStopLossOrderMode : GuaranteedStopLossOrderMode
@@ -60,7 +60,7 @@ public struct Account : Codable {
 	public let resettablePL : AccountUnits
 
 	/// The date/time that the Account’s resettablePL was last reset.
-	public let resettablePLTime : DateTime
+//	public let resettablePLTime : DateTime
 
 	/// The total amount of financing paid/collected over the lifetime of the Account.
 	public let financing : AccountUnits
@@ -78,7 +78,7 @@ public struct Account : Codable {
 
 	/// The date/time when the Account entered a margin call state.
 	/// Only provided if the Account is in a margin call.
-	public let marginCallEnterTime : DateTime?
+//	public let marginCallEnterTime : DateTime?
 
 	/// The number of times that the Account’s current margin call was extended.
 	public let marginCallExtensionCount : Int?
