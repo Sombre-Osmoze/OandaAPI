@@ -143,11 +143,10 @@ public struct Account : Codable {
 	public let lastTransactionID : TransactionID
 
 	/// The details of the Trades currently open in the Account.
-	public let trades : [String]?
-	// TODO: Trade Structure
+	public let trades : [TradeSummary]?
 
 	/// The details all Account Positions.
-	public let positions : [String]?
+	public let positions : [Position]?
 	// TODO: Position Structure
 
 	/// The details of the Orders currently pending in the Account.

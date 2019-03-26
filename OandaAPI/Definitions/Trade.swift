@@ -57,7 +57,7 @@ public enum TradeStateFilter : String, Codable {
 
 /// The specification of a Trade within an Account.
 /// This includes the full representation of the Trade’s dependent Orders in addition to the IDs of those Orders.
-struct Trade: Codable {
+public struct Trade: Codable {
 
 	/// The Trade’s identifier, unique within the Trade’s Account.
 	public let id : Int
@@ -125,6 +125,63 @@ public struct TradeSummary: Codable {
 
 	/// The Trade’s Instrument.
 	public let instrument : InstrumentName
+
+	/// The execution price of the Trade.
+	public let price : PriceValue
+
+	/// The date/time when the Trade was opened.
+	public let openTime : DateTime
+
+	/// The current state of the Trade.
+	public let state :  TradeState
+
+	/// The initial size of the Trade.
+	/// Negative values indicate a short Trade, and positive values indicate a long Trade.
+	public let initialUnits : DecimalNumber
+
+	/// The initial size of the Trade.
+	/// Negative values indicate a short Trade, and positive values indicate a long Trade.
+	public let initialMarginRequired : AccountUnits
+
+	// The number of units currently open for the Trade.
+	// This value is reduced to 0.0 as the Trade is closed.
+	public let currentUnits : DecimalNumber
+
+	/// The total profit/loss realized on the closed portion of the Trade.
+	public let realizedPL : AccountUnits
+
+	/// The unrealized profit/loss on the open portion of the Trade.
+	public let unrealizedPL : AccountUnits
+
+	/// Margin currently used by the Trade.
+	public let marginUsed : AccountUnits
+
+	/// The average closing price of the Trade.
+	/// Only present if the Trade has been closed or reduced at least once.
+	public let averageClosePrice : PriceValue
+
+	/// The IDs of the Transactions that have closed portions of this Trade.
+	public let closingTransactionIDs : [TransactionID]
+
+	/// The financing paid/collected for this Trade.
+	public let financing : AccountUnits
+
+	/// The date/time when the Trade was fully closed.
+	/// Only provided for Trades whose state is CLOSED.
+	public let closeTime : DateTime
+
+	/// The date/time when the Trade was fully closed.
+	/// Only provided for Trades whose state is CLOSED.
+	public let clientExtensions : ClientExtensions
+
+	/// ID of the Trade’s Take Profit Order, only provided if such an Order exists.
+	public let takeProfitOrderID : OrderID
+
+	/// ID of the Trade’s Stop Loss Order, only provided if such an Order exists.
+	public let stopLossOrderID : OrderID
+
+	/// ID of the Trade’s Trailing Stop Loss Order, only provided if such an Order exists.
+	public let trailingStopLossOrderID : OrderID
 }
 
 struct TradePutQuery: Codable {
