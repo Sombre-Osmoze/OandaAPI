@@ -37,11 +37,10 @@ public struct Transaction: Codable {
 }
 
 
-/// A client-provided tag that can contain any data and may be assigned to their Orders or Trades.
-/// Tags are typically used to associate groups of Trades and/or Orders together.
-public typealias ClientID = String
-
 // MARK: Transaction-related Definitions
+
+/// A client-provided identifier, used by clients to refer to their Orders or Trades with an identifier that they have provided.
+public typealias ClientID = String
 
 /// The unique Transaction identifier within each Account.
 public typealias TransactionID = String

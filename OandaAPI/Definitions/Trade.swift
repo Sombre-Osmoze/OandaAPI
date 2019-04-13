@@ -184,33 +184,6 @@ public struct TradeSummary: Codable {
 	public let trailingStopLossOrderID : OrderID
 }
 
-struct TradePutQuery: Codable {
-
-	/// The specification of the Take Profit to create/modify/cancel.
-	/// If takeProfit is set to null, the Take Profit Order will be cancelled if it exists.
-	/// If takeProfit is not provided, the exisiting Take Profit Order will not be modified.
-	/// If a sub-field of takeProfit is not specified, that field will be set to a default value on create, and be inherited by the replacing order on modify.
-	public let takeProfit : TakeProfitDetails?
-
-	/// The specification of the Stop Loss to create/modify/cancel.
-	/// If stopLoss is set to null, the Stop Loss Order will be cancelled if it exists.
-	/// If stopLoss is not provided, the exisiting Stop Loss Order will not be modified.
-	/// If a sub-field of stopLoss is not specified, that field will be set to a default value on create, and be inherited by the replacing order on modify.
-	public let stopLoss : StopLossDetails?
-
-
-	/// The specification of the Trailing Stop Loss to create/modify/cancel.
-	/// If trailingStopLoss is set to null, the Trailing Stop Loss Order will be cancelled if it exists. If trailingStopLoss is not provided, the exisiting Trailing Stop Loss Order will not be modified.
-	/// If a sub-field of trailngStopLoss is not specified, that field will be set to a default value on create, and be inherited by the replacing order on modify.
-	public let trailingStopLoss : TrailingStopLossDetails?
-
-	init(take profit: TakeProfitDetails?, stop loss : StopLossDetails?, trailling stop: TrailingStopLossDetails?) {
-		takeProfit = profit
-		stopLoss = loss
-		trailingStopLoss = stop
-	}
-}
-
 /// The dynamic (calculated) state of an open Trade
 public struct CalculatedTradeState: Codable {
 

@@ -141,6 +141,7 @@ public struct Oanda {
 		}
 	}
 
+	
 	func endpoint(url type: EndpointsURL, param: String) -> URL {
 
 		switch type {

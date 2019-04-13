@@ -198,4 +198,34 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		return MarketPriceStream(stream: request, delegate: delegate)
 	}
 
+	// MARK: - Trades
+
+	public func trades(request: TradeRequest, _ handler: @escaping(_ trades: [Trade]?, _ error: Error?)->Void) -> Void {
+
+		var param = "count=\(request.count)"
+		param.append("&state=\(request.state.rawValue)")
+		if request.instrument != nil {
+			param.append("&instrument=\(request.instrument!)")
+		}
+		if request.beforeID != nil {
+			param.append("&beforeID=\(request.beforeID!)")
+		}
+
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .trades, param: param), date: .rfc3339)
+
+		session.dataTask(with: request) { (data, response, error) in
+			if error == nil, let data = data {
+				do {
+					handler(try self.jsonDecoder.decode([Trade].self, from: data), error)
+				} catch {
+					handler(nil, error)
+				}
+
+			} else {
+				handler(nil, error)
+			}
+		}
+
+	}
+
 }
