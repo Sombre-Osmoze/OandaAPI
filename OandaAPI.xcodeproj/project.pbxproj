@@ -10,10 +10,8 @@
 		ED3B24872260D0040087F2AB /* Trades.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3B24862260D0040087F2AB /* Trades.swift */; };
 		ED3EB27121F0CCA8002B9F4D /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3EB27021F0CCA8002B9F4D /* Default.swift */; };
 		ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
-		ED94F8E021B3CB700011F912 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED94F8DF21B3CB5C0011F912 /* README.md */; };
 		EDE0D59E21F6916000B9170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F6721AE17600097A075 /* Foundation.framework */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
-		EDFE8F9721AE281F0097A075 /* OandaAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDFE8F9C21AE283E0097A075 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5521AE13790097A075 /* Account.swift */; };
 		EDFE8F9D21AE283E0097A075 /* OandaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5421AE13790097A075 /* OandaAPI.swift */; };
 		EDFE8F9E21AE283E0097A075 /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F5721AE13790097A075 /* Trade.swift */; };
@@ -219,7 +217,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDFE8F9721AE281F0097A075 /* OandaAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +333,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED94F8E021B3CB700011F912 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,9 +585,9 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -618,9 +614,9 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "black.sombre-osmoze.OandaAPI";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
