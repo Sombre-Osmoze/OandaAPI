@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED3B24872260D0040087F2AB /* Trades.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3B24862260D0040087F2AB /* Trades.swift */; };
 		ED3EB27121F0CCA8002B9F4D /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3EB27021F0CCA8002B9F4D /* Default.swift */; };
+		ED4A17FD226A69F000CACEAF /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4A17FC226A69F000CACEAF /* Instruments.swift */; };
 		ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */; };
 		EDE0D59E21F6916000B9170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F6721AE17600097A075 /* Foundation.framework */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		ED3B24862260D0040087F2AB /* Trades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trades.swift; sourceTree = "<group>"; };
 		ED3EB27021F0CCA8002B9F4D /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
+		ED4A17FC226A69F000CACEAF /* Instruments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
 		ED7B747D21C337AB00127E3E /* MarketPriceStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPriceStream.swift; sourceTree = "<group>"; };
 		ED94F8DF21B3CB5C0011F912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ED94F8E221B3CC8E0011F912 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3B24862260D0040087F2AB /* Trades.swift */,
+				ED4A17FC226A69F000CACEAF /* Instruments.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			files = (
 				EDFE8FB621AE2DF10097A075 /* Pricing.swift in Sources */,
 				ED3EB27121F0CCA8002B9F4D /* Default.swift in Sources */,
+				ED4A17FD226A69F000CACEAF /* Instruments.swift in Sources */,
 				EDFE8FB221AE2D2A0097A075 /* Instrument.swift in Sources */,
 				EDFE8FBE21AF06FF0097A075 /* Transaction.swift in Sources */,
 				EDFE8FC121AF0FD30097A075 /* Order.swift in Sources */,
