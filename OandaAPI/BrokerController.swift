@@ -22,11 +22,14 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 	private var streamTasks : [URLSessionTask] = []
 
 	private let jsonDecoder : JSONDecoder
+	public let isPractice : Bool
 
 
 	public init?(demo: Bool) {
 
 		let creds = URLCredentialStorage.shared.defaultCredential(for: .init(host: "api-fxpractice.oanda.com", port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault))
+
+		isPractice = demo
 		if let cred = creds, cred.user != nil, cred.hasPassword {
 			oandaURLS = .init(with: cred.user!, is: demo)
 			credential = cred
@@ -40,6 +43,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 	}
 
 	public init(with credentials: URLCredential, is practice: Bool) {
+		isPractice = practice
 		oandaURLS = .init(with: credentials.user!, is: practice)
 		credential = credentials
 		jsonDecoder = JSONDecoder()
