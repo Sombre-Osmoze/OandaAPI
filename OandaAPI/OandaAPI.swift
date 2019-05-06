@@ -69,6 +69,7 @@ public struct Oanda {
 		enum Account {
 			case id
 			case summary
+			case configuration
 		}
 
 		enum Instrument {
@@ -158,6 +159,8 @@ public struct Oanda {
 			return URL(string: main() + version + accounts + account)!
 		case .summary:
 			return URL(string: main() + version + accounts + account + "/" + summary)!
+		case .configuration:
+			return URL(string: main() + version + accounts + account + "/" + "configuration")!
 		}
 
 	}

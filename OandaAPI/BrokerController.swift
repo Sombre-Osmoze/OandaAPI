@@ -22,6 +22,8 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 	private var streamTasks : [URLSessionTask] = []
 
 	private let jsonDecoder : JSONDecoder
+	private let jsonEncoder : JSONEncoder
+	var dateFormat : AcceptDatetimeFormat = .rfc3339
 	public let isPractice : Bool
 
 
@@ -35,6 +37,10 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 			credential = cred
 			jsonDecoder = JSONDecoder()
 			jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
+
+			jsonEncoder = JSONEncoder()
+			jsonEncoder.dateEncodingStrategy = .formatted(Oanda.dateFormat())
+
 			super.init()
 			logs.print("Log in account %s", cred.user!)
 		} else {
@@ -48,6 +54,10 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		credential = credentials
 		jsonDecoder = JSONDecoder()
 		jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
+
+		jsonEncoder = JSONEncoder()
+		jsonEncoder.dateEncodingStrategy = .formatted(Oanda.dateFormat())
+
 		super.init()
 		URLCredentialStorage.shared.set(credential, for: oandaURLS.restSpace)
 	}
@@ -64,7 +74,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 		let encoder = JSONEncoder()
 		encoder.dateEncodingStrategy = .iso8601
-		var request = basiqueRequest(with: oandaURLS.endpoint(url: .orders), date: .rfc3339)
+		var request = basiqueRequest(with: oandaURLS.endpoint(url: .orders), date: dateFormat)
 		request.httpMethod = "POST"
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
@@ -114,31 +124,50 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		}.resume()
 	}
 
-	public func accountSummary(completion handler: @escaping(_ summary: AccountSummary?, _ error: Error?) -> Void) -> Void {
-		let request = basiqueRequest(with: oandaURLS.endpoint(url: .summary), date: .rfc3339)
+
+
+
+	public func marketPrice(for instruments: [InstrumentName], since date: DateTime) {
+		var param = instruments.description.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+		param.removeFirst()
+		param.removeLast()
+		let format = Oanda.dateFormat()
+		let strDate = format.string(from: date).replacingOccurrences(of: "\"", with: "")
+		param = "instruments=" + "&since=\(strDate)"
+
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .pricing,
+															  param: param),
+									 date: dateFormat)
 
 		session.dataTask(with: request) { (data, response, error) in
 
 			if error == nil, data != nil {
-				let decoder = JSONDecoder()
-				decoder.dateDecodingStrategy = .millisecondsSince1970
-				do {
-					let summary = try decoder.decode(AccountSummary.self, from: data!)
-					handler(summary, nil)
-				} catch let (parse) {
-
-					handler(nil, parse)
-				}
+				print(data!.debugDescription)
+				print(response as! HTTPURLResponse)
 			}
 		}.resume()
 	}
 
+	public func  marketPrice(for instruments: [InstrumentName], snapshot: Bool, delegate: MarketPriceStreamDelegate) -> MarketPriceStream {
 
-	public func testiong() -> Void {
+		// TODO: Better encoding (HTTP URL)
+		var param = instruments.description.replacingOccurrences(of: ", ", with: "%2C")
+		param.removeFirst()
+		param.removeLast()
+		param = "instruments=" + param.replacingOccurrences(of: "\"", with: "") + "&snapshot=\(snapshot.description)"
+		let request = basiqueRequest(with: oandaURLS.endpointStream(url: .pricing, param: param), date: dateFormat)
 
-		
+		return MarketPriceStream(stream: request, delegate: delegate)
 	}
 
+	// MARK: - Account
+
+	/// This function will fetch all the sub-account related with the given token.
+	///
+	/// - Parameters:
+	///   - token: The bearer token
+	///   - demo: If the token is from a Practice account or not
+	///   - handler: A handler with all the sub account
 	public class func checkAccounts(bearer token: String, demo: Bool, completion handler: @escaping(_ accounts: [SubAccount], _ error: Error?) -> Void) -> Void {
 
 		var request = URLRequest(url: URL(string: "https://api-fx\(demo ? "practice" : "trade").oanda.com/v3/accounts")!)
@@ -157,7 +186,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 					parse.removeLast()
 
 					let accounts = try! JSONDecoder().decode([SubAccount].self, from: parse.data(using: .utf8)!)
-						handler(accounts, error)
+					handler(accounts, error)
 				default:
 					print((response as! HTTPURLResponse))
 					// TODO: Create more explicite error
@@ -166,41 +195,38 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 			} else {
 				handler([], error)
 			}
-		}.resume()
+			}.resume()
 	}
 
-	public func marketPrice(for instruments: [InstrumentName], since date: DateTime) {
-		var param = instruments.description.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-		param.removeFirst()
-		param.removeLast()
-		let format = Oanda.dateFormat()
-		let strDate = format.string(from: date).replacingOccurrences(of: "\"", with: "")
-		param = "instruments=" + "&since=\(strDate)"
-
-		let request = basiqueRequest(with: oandaURLS.endpoint(url: .pricing,
-															  param: param),
-									 date: .rfc3339)
+	public func accountSummary(completion handler: @escaping(_ summary: AccountSummary?, _ error: Error?) -> Void) -> Void {
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .summary), date: dateFormat)
 
 		session.dataTask(with: request) { (data, response, error) in
 
 			if error == nil, data != nil {
-				print(data!.debugDescription)
-				print(response as! HTTPURLResponse)
+				do {
+					let summary = try self.jsonDecoder.decode(AccountSummary.self, from: data!)
+					handler(summary, nil)
+				} catch let (parse) {
+
+					handler(nil, parse)
+				}
 			}
 		}.resume()
 	}
 
-	public func  marketPrice(for instruments: [InstrumentName], snapshot: Bool, delegate: MarketPriceStreamDelegate) -> MarketPriceStream {
+	public func change(account values: [String : Codable]) -> Void {
+		var request = basiqueRequest(with: oandaURLS.endpoint(url: .configuration), date: dateFormat)
+		request.httpMethod = "PATCH"
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+		request.httpBody = try? JSONSerialization.data(withJSONObject: values, options: [])
 
-		// TODO: Better encoding (HTTP URL)
-		var param = instruments.description.replacingOccurrences(of: ", ", with: "%2C")
-		param.removeFirst()
-		param.removeLast()
-		param = "instruments=" + param.replacingOccurrences(of: "\"", with: "") + "&snapshot=\(snapshot.description)"
-		let request = basiqueRequest(with: oandaURLS.endpointStream(url: .pricing, param: param), date: .rfc3339)
-
-		return MarketPriceStream(stream: request, delegate: delegate)
+		session.dataTask(with: request) { (data, response, error) in
+			
+		}.resume()
 	}
+
+
 
 	// MARK: - Trades
 
@@ -215,7 +241,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 			param.append("&beforeID=\(request.beforeID!)")
 		}
 
-		let request = basiqueRequest(with: oandaURLS.endpoint(url: .trades, param: param), date: .rfc3339)
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .trades, param: param), date: dateFormat)
 
 		session.dataTask(with: request) { (data, response, error) in
 			if error == nil, let data = data {
