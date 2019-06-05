@@ -1,3 +1,2 @@
-# OandaAPI
-Oanda Broker Swift API implemention in progress
-
+# Oanda API
+## Oanda Broker Swift API implemention in progress
