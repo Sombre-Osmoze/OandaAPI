@@ -114,6 +114,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 									 date: query.dateFormat)
 
 		session.dataTask(with: request) { (data, response, error) in
+			print(String(data: data!, encoding: .utf8))
 			if error == nil, data != nil {
 				do {
 					handler(try self.jsonDecoder.decode(InstrumentCandles.self, from: data!), nil)
