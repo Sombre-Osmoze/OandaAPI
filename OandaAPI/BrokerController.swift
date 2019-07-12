@@ -82,12 +82,14 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 			request.httpBody = try? encoder.encode(["order" : order as! MarketOrderRequest])
 		}
 
-		session.dataTask(with: request) { (data, response, error) in
+		let task = session.dataTask(with: request) { (data, response, error) in
 
 			print(String(data: data!, encoding: .utf8))
 			print(error)
 			handler()
-		}.resume()
+		}
+		task.priority = URLSessionTask.highPriority
+		task.resume()
 	}
 
 	public func getData(for query: InstrumentCandlesQuery,
@@ -114,7 +116,6 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 									 date: query.dateFormat)
 
 		session.dataTask(with: request) { (data, response, error) in
-			print(String(data: data!, encoding: .utf8))
 			if error == nil, data != nil {
 				do {
 					handler(try self.jsonDecoder.decode(InstrumentCandles.self, from: data!), nil)
