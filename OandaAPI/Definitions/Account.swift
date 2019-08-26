@@ -101,7 +101,8 @@ public struct Account : Codable {
 	/// The total unrealized profit/loss for all Trades currently open in the Account
 	public let unrealizedPL : AccountUnits
 
-	/// The net asset value of the Account. Equal to Account balance + unrealizedPL.
+	/// The net asset value of the Account.
+	/// Equal to Account balance + unrealizedPL.
 	public let NAV : AccountUnits
 
 	/// Margin currently used for the Account.
@@ -155,13 +156,15 @@ public struct Account : Codable {
 }
 
 /// An AccountState Object is used to represent an Account’s current price-dependent state.
-/// Price-dependent Account state is dependent on OANDA’s current Prices, and includes things like unrealized PL, NAV and Trailing Stop Loss Order state.
+/// Price-dependent Account state is dependent on OANDA’s current Prices,
+/// and includes things like unrealized PL, NAV and Trailing Stop Loss Order state.
 struct AccountChangesState: Codable {
 
 	/// The total unrealized profit/loss for all Trades currently open in the Account.
 	public let unrealizedPL : AccountUnits
 
-	/// The net asset value of the Account. Equal to Account balance + unrealizedPL.
+	/// The net asset value of the Account.
+	/// Equal to Account balance + unrealizedPL.
 	public let NAV: AccountUnits
 
 	/// Margin currently used for the Account.
@@ -242,7 +245,8 @@ public struct CalculatedAccountState: Codable {
 	/// The total unrealized profit/loss for all Trades currently open in the Account.
 	public let unrealizedPL : AccountUnits
 
-	/// The net asset value of the Account. Equal to Account balance + unrealizedPL.
+	/// The net asset value of the Account.
+	/// Equal to Account balance + unrealizedPL.
 	public let NAV : AccountUnits
 
 	/// Margin currently used for the Account.
@@ -263,24 +267,27 @@ public struct CalculatedAccountState: Codable {
 	/// The Account’s margin closeout margin used.
 	public let marginCloseoutMarginUsed : AccountUnits
 
-	/// The Account’s margin closeout percentage. When this value is 1.0 or above the Account is in a margin closeout situation.
+	/// The Account’s margin closeout percentage.
+	/// When this value is 1.0 or above the Account is in a margin closeout situation.
 	public let marginCloseoutPercent : String
 	// TODO: JSON
 
 	/// The value of the Account’s open positions as used for margin closeout calculations represented in the Account’s home currency.
 	public let marginCloseoutPositionValue : DecimalNumber
 
-	/// he current WithdrawalLimit for the account which will be zero or a positive value indicating how much can be withdrawn from the account.
+	/// The current WithdrawalLimit for the account which will be zero or a positive value indicating how much can be withdrawn from the account.
 	public let withdrawalLimit : AccountUnits
 
 	/// The Account’s margin call margin used.
 	public let marginCallMarginUsed : AccountUnits
 
-	/// he Account’s margin call percentage. When this value is 1.0 or above the Account is in a margin call situation.
+	/// The Account’s margin call percentage.
+	/// When this value is 1.0 or above the Account is in a margin call situation.
 	public let marginCallPercent : DecimalNumber
 }
 
-/// An AccountChanges Object is used to represent the changes to an Account’s Orders, Trades and Positions since a specified Account TransactionID in the past.
+/// An AccountChanges Object is used to represent the changes to an Account’s Orders,
+/// Trades and Positions since a specified Account TransactionID in the past.
 public struct AccountChanges: Codable {
 
 	/// The Orders created.
@@ -318,7 +325,7 @@ enum AccountFinancingMode: String, Codable {
 	case noFinancing = "NO_FINANCING"
 	/// Second-by-second financing is paid/charged for open Trades in the Account, both daily and when the the Trade is closed
 	case secondBySecond = "SECOND_BY_SECOND"
-	// A full day’s worth of financing is paid/charged for open Trades in the Account daily at 5pm New York time
+	/// A full day’s worth of financing is paid/charged for open Trades in the Account daily at 5pm New York time
 	case daily = "DAILY"
 }
 
