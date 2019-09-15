@@ -66,12 +66,6 @@ public struct ClientExtensions : Codable {
 
 	/// A comment associated with the Order/Trade
 	public let comment : ClientComment
-
-	public init(id: ClientID, tag: ClientTag, comment: ClientComment) {
-		self.id = id
-		self.tag = tag
-		self.comment = comment
-	}
 }
 
 /// TakeProfitDetails specifies the details of a Take Profit Order to be created on behalf of a client.
@@ -84,13 +78,14 @@ public struct TakeProfitDetails: Codable {
 
 	/// The time in force for the created Take Profit Order.
 	/// This may only be GTC, GTD or GFD.
-	public let timeInForce : TimeInForce
+	/// (Default: *GTC*)
+	public var timeInForce : TimeInForce = .gtc
 
 	/// The date when the Take Profit Order will be cancelled on if timeInForce is GTD.
-	public let gtdTime : DateTime?
+	public var gtdTime : DateTime? = nil
 
 	/// The Client Extensions to add to the Take Profit Order when created.
-	public let clientExtensions : ClientExtensions?
+	public var clientExtensions : ClientExtensions? = nil
 
 	public init(_ price: PriceValue, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions?) {
 		self.price = price
@@ -110,13 +105,14 @@ public struct StopLossDetails: Codable {
 
 	/// The time in force for the created Take Profit Order.
 	/// This may only be GTC, GTD or GFD.
-	public let timeInForce : TimeInForce
+	/// (Default: *GTC*)
+	public var timeInForce : TimeInForce = .gtc
 
 	/// The date when the Take Profit Order will be cancelled on if timeInForce is GTD.
-	public let gtdTime : DateTime?
+	public var gtdTime : DateTime? = nil
 
 	/// The Client Extensions to add to the Take Profit Order when created.
-	public let clientExtensions : ClientExtensions?
+	public var clientExtensions : ClientExtensions? = nil
 
 	/// Flag indicating that the price for the Stop Loss Order is guaranteed.
 	/// The default value depends on the GuaranteedStopLossOrderMode of the account, if it is REQUIRED, the default will be true, for DISABLED or ENABLED thedefault is false.
@@ -141,13 +137,14 @@ public struct TrailingStopLossDetails: Codable {
 
 	/// The time in force for the created Take Profit Order.
 	/// This may only be GTC, GTD or GFD.
-	public let timeInForce : TimeInForce
+	/// (Default: *GTC*)
+	public var timeInForce : TimeInForce = .gtc
 
 	/// The date when the Take Profit Order will be cancelled on if timeInForce is GTD.
-	public let gtdTime : DateTime?
+	public var gtdTime : DateTime? = nil
 
 	/// The Client Extensions to add to the Take Profit Order when created.
-	public let clientExtensions : ClientExtensions
+	public var clientExtensions : ClientExtensions? = nil
 
 	public init(_ distance: DecimalNumber, force time: TimeInForce = .gtc, date: DateTime?, client extensions: ClientExtensions) {
 		self.distance = distance
@@ -157,6 +154,65 @@ public struct TrailingStopLossDetails: Codable {
 	}
 }
 
+
+/// A MarketOrderTradeClose specifies the extensions to a Market Order that has been created specifically to close a Trade.
+public struct MarketOrderTradeClose : Codable {
+
+	/// The ID of the Trade requested to be closed
+	public let tradeID : TradeID
+
+	/// The client ID of the Trade requested to be closed
+	public let clientTradeID : ClientID
+
+	/// Indication of how much of the Trade to close.
+	/// Either “ALL”, or a DecimalNumber reflection a partial close of the Trade.
+	public let units : DecimalNumber
+
+}
+
+
+/// Details for the Market Order extensions specific to a Market Order placed that is part of a Market Order Margin Closeout in a client’s account
+public struct MarketOrderMarginCloseout: Codable {
+
+	///  The reason the Market Order was created to perform a margin closeout
+	public let reason : MarketOrderMarginCloseoutReason
+}
+
+/// The reason that the Market Order was created to perform a margin closeout.
+public enum MarketOrderMarginCloseoutReason : String, Codable {
+	/// Trade closures resulted from violating OANDA’s margin policy
+	case marginCheckViolation = "MARGIN_CHECK_VIOLATION"
+	/// Trade closures came from a margin closeout event resulting from regulatory conditions placed on the Account’s margin call
+	case regulatoryMarginCallViolation = "REGULATORY_MARGIN_CALL_VIOLATION"
+}
+
+/// Details for the Market Order extensions specific to a Market Order placed with the intent of fully closing a specific open trade
+/// that should have already been closed but wasn’t due to halted market conditions
+public struct MarketOrderDelayedTradeClose : Codable {
+
+	/// The ID of the Trade being closed
+	public let tradeID : TradeID
+
+	/// The Client ID of the Trade being closed
+	public let clientTradeID : TradeID
+
+	/// The Transaction ID of the DelayedTradeClosure transaction to which this Delayed Trade Close belongs to
+	public let sourceTransactionID : TransactionID
+}
+
+
+/// A MarketOrderPositionCloseout specifies the extensions to a Market Order when it has been created to closeout a specific Position.
+public struct MarketOrderPositionCloseout : Codable {
+
+	/// The instrument of the Position being closed out.
+	public let instrument : InstrumentName
+
+	/// Indication of how much of the Position to close. Either “ALL”,
+	/// or a DecimalNumber reflection a partial close of the Trade.
+	/// The DecimalNumber must always be positive,
+	/// and represent a number that doesn’t exceed the absolute size of the Position.
+	public let units : DecimalNumber
+}
 
 /// The request identifier.
 public typealias RequestID = String

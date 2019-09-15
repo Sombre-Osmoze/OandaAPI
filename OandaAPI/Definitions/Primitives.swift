@@ -26,6 +26,18 @@ public typealias Currency = String
 /// OANDA-assigned TradeIDs are positive integers, and are derived from the TransactionID of the Transaction that opened the Trade.
 public typealias InstrumentName = String
 
+public enum Pairs: String, Codable {
+	case eur = "EUR"
+	case gbp = "GBP"
+	case usd = "USD"
+	case jpy = "JPY"
+	case aud = "AUD"
+	case chf = "CHF"
+}
+
+public typealias Pair = (buy: Pairs, sell: Pairs)
+
+
 extension InstrumentName {
 
 	public init(_ buy: Pairs, _ sell: Pairs) {
@@ -35,6 +47,12 @@ extension InstrumentName {
 	public func pair() -> (Pairs , Pairs) {
 		let pairs = self.split(separator: "_")
 		return (Pairs(rawValue: String(pairs.first!))!, Pairs(rawValue: String(pairs.last!))!)
+	}
+
+	public func pairs() -> Pair {
+		let pairs = self.split(separator: "_")
+		return (buy: Pairs(rawValue: String(pairs.first!))!,
+				sell: Pairs(rawValue: String(pairs.last!))!)
 	}
 
 }

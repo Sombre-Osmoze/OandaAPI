@@ -23,25 +23,25 @@ public struct Position: Codable {
 	public let unrealizedPL : AccountUnits
 
 	/// Margin currently used by the Position.
-	public let marginUsed : AccountUnits
+	public let marginUsed : AccountUnits?
 
 	/// Profit/loss realized by the Position since the Account’s resettablePL was last reset by the client.
 	public let resettablePL : AccountUnits
 
 	/// The total amount of financing paid/collected for this instrument over the lifetime of the Account.
-	public let financing : AccountUnits
+	public let financing : AccountUnits?
 
 	/// The total amount of commission paid for this instrument over the lifetime of the Account.
-	public let commission : AccountUnits
+	public let commission : AccountUnits?
 
 	/// The total amount of fees charged over the lifetime of the Account for the execution of guaranteed Stop Loss Orders for this instrument.
-	public let guaranteedExecutionFees : AccountUnits
+	public let guaranteedExecutionFees : AccountUnits?
 
 	/// The details of the long side of the Position.
-	public let long : PositionSide
+	public let long : PositionSide?
 
 	/// The details of the short side of the Position.
-	public let short : PositionSide
+	public let short : PositionSide?
 }
 
 /// The representation of a Position for a single direction (long or short).
@@ -51,10 +51,10 @@ public struct PositionSide: Codable {
 	public let units : DecimalNumber
 
 	/// Volume-weighted average of the underlying Trade open prices for the Position.
-	public let averagePrice : PriceValue
+	public let averagePrice : PriceValue?
 
 	/// List of the open Trade IDs which contribute to the open Position.
-	public let tradeIDs : [TradeID]
+	public let tradeIDs : [TradeID]?
 
 	/// Profit/loss realized by the PositionSide over the lifetime of the Account.
 	public let pl : AccountUnits
@@ -66,10 +66,10 @@ public struct PositionSide: Codable {
 	public let resettablePL : AccountUnits
 
 	/// he total amount of financing paid/collected for this PositionSide over the lifetime of the Account.
-	public let financing : AccountUnits
+	public let financing : AccountUnits?
 
 	/// The total amount of fees charged over the lifetime of the Account for the execution of guaranteed Stop Loss Orders attached to Trades for this PositionSide.
-	public let guaranteedExecutionFees : AccountUnits
+	public let guaranteedExecutionFees : AccountUnits?
 }
 
 /// The dynamic (calculated) state of a Position

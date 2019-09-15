@@ -9,6 +9,10 @@
 import Foundation
 import os.log
 
+#if canImport(Combine)
+import Combine
+#endif
+
 open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate, URLSessionDataDelegate {
 
 	private let logs = DefaultLogging()
@@ -16,30 +20,32 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 	public let oandaURLS : Oanda
 
 	private var streamSession : URLSession { return .init(configuration: .default, delegate: self, delegateQueue: .init()) }
-	private var session : URLSession { return .init(configuration: .default, delegate: self, delegateQueue: .init()) }
+	private var session : URLSession {
+
+		let config = URLSessionConfiguration.default
+		config.httpMaximumConnectionsPerHost = 100
+		config.httpAdditionalHeaders = ["Authorization" : "Bearer \(credential.password!)",
+										"Accept-Datetime-Format" : dateFormat.rawValue]
+		return .init(configuration: config, delegate: self, delegateQueue: .init()) }
 
 	private let credential : URLCredential
 	private var streamTasks : [URLSessionTask] = []
 
-	private let jsonDecoder : JSONDecoder
-	private let jsonEncoder : JSONEncoder
 	var dateFormat : AcceptDatetimeFormat = .rfc3339
 	public let isPractice : Bool
 
 
 	public init?(demo: Bool) {
 
-		let creds = URLCredentialStorage.shared.defaultCredential(for: .init(host: "api-fxpractice.oanda.com", port: 443, protocol: "https", realm: nil, authenticationMethod: NSURLAuthenticationMethodDefault))
+		let creds = URLCredentialStorage.shared.defaultCredential(for: .init(host: "api-fx\(demo ? "practice" : "trade").oanda.com",
+			port: 443, protocol: "https",
+			realm: nil,
+			authenticationMethod: NSURLAuthenticationMethodDefault))
 
 		isPractice = demo
 		if let cred = creds, cred.user != nil, cred.hasPassword {
 			oandaURLS = .init(with: cred.user!, is: demo)
 			credential = cred
-			jsonDecoder = JSONDecoder()
-			jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
-
-			jsonEncoder = JSONEncoder()
-			jsonEncoder.dateEncodingStrategy = .formatted(Oanda.dateFormat())
 
 			super.init()
 			logs.print("Log in account %s", cred.user!)
@@ -52,14 +58,16 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		isPractice = practice
 		oandaURLS = .init(with: credentials.user!, is: practice)
 		credential = credentials
-		jsonDecoder = JSONDecoder()
-		jsonDecoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
 
-		jsonEncoder = JSONEncoder()
-		jsonEncoder.dateEncodingStrategy = .formatted(Oanda.dateFormat())
 
 		super.init()
 		URLCredentialStorage.shared.set(credential, for: oandaURLS.restSpace)
+	}
+
+	// MARK: - Request and error
+
+	private enum RequestError: Error {
+		case noResponse
 	}
 
 	private func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
@@ -70,16 +78,50 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		return request
 	}
 
+	private func verify(error: Error?, response: URLResponse?, data: Data?) throws -> Void {
+		// Verify that the request response don't have error
+		guard error == nil else { throw error! }
+
+		guard let resp = response as? HTTPURLResponse else { throw RequestError.noResponse }
+
+		if let err = ErrorCode(rawValue: resp.statusCode) {
+			throw err
+		}
+	}
+
+	// TODO: Change to a user friendly error.
+	private func handle(_ error: Error) -> Error {
+		return error
+	}
+
+	// MARK: - Account Requests
+
+	public func info(completion handler: @escaping(Result<AccountResponse, Error>) ->Void) -> Void {
+		let request = basiqueRequest(with: oandaURLS.endpoint(url: .id), date: .rfc3339)
+
+		session.dataTask(with: request) { (data, response, error) in
+			do {
+				try? self.verify(error: error, response: response, data: data)
+
+				if let data = data {
+					handler(.success(try jsonDecoder.decode(AccountResponse.self, from: data)))
+				}
+			} catch {
+				handler(.failure(self.handle(error)))
+			}
+
+
+		}.resume()
+	}
+
 	public func createOrder(order: OrderRequest, completion handler: @escaping()->Void) -> Void {
 
-		let encoder = JSONEncoder()
-		encoder.dateEncodingStrategy = .iso8601
 		var request = basiqueRequest(with: oandaURLS.endpoint(url: .orders), date: dateFormat)
 		request.httpMethod = "POST"
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
 		if order.type == OrderType.market {
-			request.httpBody = try? encoder.encode(["order" : order as! MarketOrderRequest])
+			request.httpBody = try? jsonEncoder.encode(["order" : order as! MarketOrderRequest])
 		}
 
 		let task = session.dataTask(with: request) { (data, response, error) in
@@ -118,7 +160,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		session.dataTask(with: request) { (data, response, error) in
 			if error == nil, data != nil {
 				do {
-					handler(try self.jsonDecoder.decode(InstrumentCandles.self, from: data!), nil)
+					handler(try jsonDecoder.decode(InstrumentCandles.self, from: data!), nil)
 				} catch {
 					handler(nil, error)
 				}
@@ -187,7 +229,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 					parse = parse.replacingOccurrences(of: "{\"accounts\":", with: "")
 					parse.removeLast()
 
-					let accounts = try! JSONDecoder().decode([SubAccount].self, from: parse.data(using: .utf8)!)
+					let accounts = try! jsonDecoder.decode([SubAccount].self, from: parse.data(using: .utf8)!)
 					handler(accounts, error)
 				default:
 					print((response as! HTTPURLResponse))
@@ -207,7 +249,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 			if error == nil, data != nil {
 				do {
-					let summary = try self.jsonDecoder.decode(AccountSummary.self, from: data!)
+					let summary = try jsonDecoder.decode(AccountSummary.self, from: data!)
 					handler(summary, nil)
 				} catch let (parse) {
 
@@ -248,7 +290,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 		session.dataTask(with: request) { (data, response, error) in
 			if error == nil, let data = data {
 				do {
-					handler(try self.jsonDecoder.decode([Trade].self, from: data), error)
+					handler(try jsonDecoder.decode([Trade].self, from: data), error)
 				} catch {
 					handler(nil, error)
 				}

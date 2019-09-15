@@ -8,13 +8,6 @@
 
 import Foundation
 
-public enum Pairs: String, Codable {
-	case eur = "EUR"
-	case gbp = "GBP"
-	case usd = "USD"
-	case jpy = "JPY"
-	case aud = "AUD"
-}
 
 
 /// You can use this structure for all oanda infomations
@@ -208,7 +201,45 @@ public struct Oanda {
 		format.calendar = Calendar(identifier: .iso8601)
 		format.locale = Locale(identifier: "en_US_POSIX")
 		format.timeZone = TimeZone.autoupdatingCurrent
-		format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXXX"
+		format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 		return format
 	}
 }
+
+// MARK: - Request Error
+
+/// Common HTTP Error Responses
+/// Following are common HTTP Error Responses that may be returned from the v20 REST API when an error occurs.
+enum ErrorCode: Int, Error {
+
+	/// A “400 Bad Request” reponse may be returned from the v20 REST API when the client has provided invalid data to be processed.
+	case badRequest = 400
+
+	/// A “401 Unauthorized” reponse may be returned from the v20 REST API when the endpoint being accessed requires the client to be authenticated
+	/// however the authentication token is invalid or has not been provided.
+	case unauthorized = 401
+
+	/// A “403 Forbidden” response may be returned from the v20 REST API when the client has provided a token that does not authorize
+	/// them to perform the action implemented by the API endpoint.
+	case forbidden = 403
+
+	/// A “404 Not Found” response may be returned from the v20 REST API when the client is attempting to refer to an entity
+	/// (Account, Trade, Order, Position, etc.) that does not exist.
+	case notFound = 404
+}
+
+
+// MARK: - Coding
+
+
+internal let jsonDecoder : JSONDecoder = {
+	let decoder = JSONDecoder()
+	decoder.dateDecodingStrategy = .formatted(Oanda.dateFormat())
+	return decoder
+}()
+
+internal let jsonEncoder : JSONEncoder = {
+	let encoder = JSONEncoder()
+	encoder.dateEncodingStrategy = .formatted(Oanda.dateFormat())
+	return encoder
+}()

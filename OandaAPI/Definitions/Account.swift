@@ -8,26 +8,13 @@
 
 import Foundation
 
-/// For First account fetch
-public struct SubAccount : Codable {
-
-	/// The Oanda id of the account
-	public let id : AccountID
-
-	/// The tags related to the account
-	public let tags : [String]
-}
-
-
-public struct AccountSummary: Codable {
-	public let account : Account
-	public let lastTransactionID : TransactionID
-}
-
-
 /// The string representation of an Account Identifier.
 /// “-“-delimited string with format “{siteID}-{divisionID}-{userID}-{accountNumber}”
 public typealias AccountID = String
+
+/// User ID.
+/// - Format: XXXXXXX in numbers.
+public typealias UserID = Int
 
 public struct Account : Codable {
 
@@ -45,10 +32,10 @@ public struct Account : Codable {
 	public let balance : AccountUnits
 
 	/// ID of the user that created the Account.
-	public let createdByUserID : Int
+	public let createdByUserID : UserID
 
 	/// The date/time when the Account was created.
-//	public let createdTime : DateTime
+	public let createdTime : DateTime
 
 	/// The current guaranteed Stop Loss Order mode of the Account.
 	public let guaranteedStopLossOrderMode : GuaranteedStopLossOrderMode
@@ -60,16 +47,17 @@ public struct Account : Codable {
 	public let resettablePL : AccountUnits
 
 	/// The date/time that the Account’s resettablePL was last reset.
-//	public let resettablePLTime : DateTime
+	public let resettablePLTime : DateTime? = nil
+	// TODO: Reset once
 
 	/// The total amount of financing paid/collected over the lifetime of the Account.
-	public let financing : AccountUnits
+	public let financing : AccountUnits?
 
 	/// The total amount of commission paid over the lifetime of the Account.
-	public let commission : AccountUnits
+	public let commission : AccountUnits?
 
 	/// The total amount of fees charged over the lifetime of the Account for the execution of guaranteed Stop Loss Orders.
-	public let guaranteedExecutionFees : AccountUnits
+	public let guaranteedExecutionFees : AccountUnits?
 
 	/// Client-provided margin rate override for the Account.
 	/// The effective margin rate of the Account is the lesser of this value and the OANDA margin rate for the Account’s division.
@@ -78,7 +66,7 @@ public struct Account : Codable {
 
 	/// The date/time when the Account entered a margin call state.
 	/// Only provided if the Account is in a margin call.
-//	public let marginCallEnterTime : DateTime?
+	public let marginCallEnterTime : DateTime?
 
 	/// The number of times that the Account’s current margin call was extended.
 	public let marginCallExtensionCount : Int?
@@ -134,11 +122,11 @@ public struct Account : Codable {
 	public let withdrawalLimit : DecimalNumber
 
 	/// The Account’s margin call margin used.
-	public let marginCallMarginUsed : AccountUnits
+	public let marginCallMarginUsed : AccountUnits?
 
 	/// The Account’s margin call percentage.
 	/// When this value is 1.0 or above the Account is in a margin call situation.
-	public let marginCallPercent : DecimalNumber
+	public let marginCallPercent : DecimalNumber?
 
 	/// The ID of the last Transaction created for the Account.
 	public let lastTransactionID : TransactionID
@@ -148,7 +136,6 @@ public struct Account : Codable {
 
 	/// The details all Account Positions.
 	public let positions : [Position]?
-	// TODO: Position Structure
 
 	/// The details of the Orders currently pending in the Account.
 	public let orders : [Order]?
@@ -158,7 +145,7 @@ public struct Account : Codable {
 /// An AccountState Object is used to represent an Account’s current price-dependent state.
 /// Price-dependent Account state is dependent on OANDA’s current Prices,
 /// and includes things like unrealized PL, NAV and Trailing Stop Loss Order state.
-struct AccountChangesState: Codable {
+public struct AccountChangesState: Codable {
 
 	/// The total unrealized profit/loss for all Trades currently open in the Account.
 	public let unrealizedPL : AccountUnits
@@ -196,20 +183,20 @@ struct AccountChangesState: Codable {
 	public let withdrawalLimit : AccountUnits
 
 	/// The Account’s margin call margin used.
-	public let marginCallMarginUsed : AccountUnits
+	public let marginCallMarginUsed : AccountUnits?
 
 	/// The Account’s margin call percentage.
 	/// When this value is 1.0 or above the Account is in a margin call situation.
-	public let marginCallPercent : DecimalNumber
+	public let marginCallPercent : DecimalNumber?
 
 	/// The price-dependent state of each pending Order in the Account.
-	public let orders : [DynamicOrderState]
+	public let orders : [DynamicOrderState]?
 
 	/// The price-dependent state for each open Trade in the Account.
-	public let trades : [CalculatedTradeState]
+	public let trades : [CalculatedTradeState]?
 
 	/// The price-dependent state for each open Position in the Account.
-	public let positions : [CalculatedPositionState]
+	public let positions : [CalculatedPositionState]?
 }
 
 /// Properties related to an Account.
