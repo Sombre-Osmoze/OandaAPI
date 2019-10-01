@@ -14,6 +14,8 @@
 		EDB84A672320770900E44431 /* Accounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB84A662320770900E44431 /* Accounts.swift */; };
 		EDB84A6C232078D800E44431 /* AccountsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB84A6B232078D800E44431 /* AccountsTests.swift */; };
 		EDB84A6E23207B5300E44431 /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB84A6D23207B5300E44431 /* AccountTests.swift */; };
+		EDC0E913233397E3009A42DF /* OrdersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC0E912233397E3009A42DF /* OrdersTests.swift */; };
+		EDC0E91523339838009A42DF /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC0E91423339838009A42DF /* Orders.swift */; };
 		EDD63515232DABBA002E1BF9 /* OrderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD63514232DABBA002E1BF9 /* OrderTests.swift */; };
 		EDE0D59E21F6916000B9170B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE8F6721AE17600097A075 /* Foundation.framework */; };
 		EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */; };
@@ -59,6 +61,8 @@
 		EDB84A662320770900E44431 /* Accounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounts.swift; sourceTree = "<group>"; };
 		EDB84A6B232078D800E44431 /* AccountsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsTests.swift; sourceTree = "<group>"; };
 		EDB84A6D23207B5300E44431 /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
+		EDC0E912233397E3009A42DF /* OrdersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTests.swift; sourceTree = "<group>"; };
+		EDC0E91423339838009A42DF /* Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		EDD63514232DABBA002E1BF9 /* OrderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTests.swift; sourceTree = "<group>"; };
 		EDDBDFDE21B9E1060066E185 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		EDFE8F3E21AE134B0097A075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +74,6 @@
 		EDFE8F5621AE13790097A075 /* BrokerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerController.swift; sourceTree = "<group>"; };
 		EDFE8F5721AE13790097A075 /* Trade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		EDFE8F6721AE17600097A075 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OandaAPI.h; sourceTree = "<group>"; };
 		EDFE8F8F21AE27D00097A075 /* OandaAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OandaAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFE8FA121AE28590097A075 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		EDFE8FB121AE2D2A0097A075 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 				ED3B24862260D0040087F2AB /* Trades.swift */,
 				ED4A17FC226A69F000CACEAF /* Instruments.swift */,
 				EDB84A662320770900E44431 /* Accounts.swift */,
+				EDC0E91423339838009A42DF /* Orders.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -164,7 +168,6 @@
 		EDFE8F3C21AE134B0097A075 /* OandaAPI */ = {
 			isa = PBXGroup;
 			children = (
-				EDFE8F7421AE1EDE0097A075 /* OandaAPI.h */,
 				EDFE8F3E21AE134B0097A075 /* Info.plist */,
 				EDFE8F5621AE13790097A075 /* BrokerController.swift */,
 				EDFE8F5421AE13790097A075 /* OandaAPI.swift */,
@@ -179,6 +182,7 @@
 		EDFE8F4721AE134B0097A075 /* OandaAPITests */ = {
 			isa = PBXGroup;
 			children = (
+				EDC0E912233397E3009A42DF /* OrdersTests.swift */,
 				EDB84A6B232078D800E44431 /* AccountsTests.swift */,
 				EDFE8F4821AE134B0097A075 /* OandaAPITests.swift */,
 				EDFE8F4A21AE134B0097A075 /* Info.plist */,
@@ -364,6 +368,7 @@
 			files = (
 				EDFE8F4921AE134B0097A075 /* OandaAPITests.swift in Sources */,
 				EDB84A6C232078D800E44431 /* AccountsTests.swift in Sources */,
+				EDC0E913233397E3009A42DF /* OrdersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +382,7 @@
 				ED4A17FD226A69F000CACEAF /* Instruments.swift in Sources */,
 				EDFE8FB221AE2D2A0097A075 /* Instrument.swift in Sources */,
 				EDFE8FBE21AF06FF0097A075 /* Transaction.swift in Sources */,
+				EDC0E91523339838009A42DF /* Orders.swift in Sources */,
 				EDFE8FC121AF0FD30097A075 /* Order.swift in Sources */,
 				EDFE8F9D21AE283E0097A075 /* OandaAPI.swift in Sources */,
 				ED7B747E21C337AB00127E3E /* MarketPriceStream.swift in Sources */,
@@ -468,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -476,6 +482,7 @@
 				SUPPORTED_PLATFORMS = "macosx watchos iphoneos iphonesimulator watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e armv7 armv7s armv7k arm64_32";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -529,13 +536,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "macosx watchos iphoneos iphonesimulator watchsimulator";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e armv7 armv7s armv7k arm64_32";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -607,8 +615,8 @@
 				STRIP_SWIFT_SYMBOLS = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos iphonesimulator iphoneos macosx";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,3,4";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -639,8 +647,8 @@
 				STRIP_SWIFT_SYMBOLS = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos iphonesimulator iphoneos macosx";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,3,4";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};

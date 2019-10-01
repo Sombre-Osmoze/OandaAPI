@@ -80,7 +80,6 @@ public class MarketPriceStream: NSObject, StreamDelegate, URLSessionDelegate, UR
 	}
 
 	public func urlSession(_ session: URLSession, betterRouteDiscoveredFor streamTask: URLSessionStreamTask) {
-		streamTask.stopSecureConnection()
 		streamTask.closeRead()
 		streamTask.closeWrite()
 		session.dataTask(with: request).resume()

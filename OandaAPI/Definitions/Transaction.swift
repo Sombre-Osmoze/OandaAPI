@@ -66,6 +66,12 @@ public struct ClientExtensions : Codable {
 
 	/// A comment associated with the Order/Trade
 	public let comment : ClientComment
+
+	public init(id: ClientID, tag: ClientTag, comment: ClientComment) {
+		self.id = id
+		self.tag = tag
+		self.comment = comment
+	}
 }
 
 /// TakeProfitDetails specifies the details of a Take Profit Order to be created on behalf of a client.

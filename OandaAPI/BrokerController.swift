@@ -34,8 +34,9 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 	var dateFormat : AcceptDatetimeFormat = .rfc3339
 	public let isPractice : Bool
 
+	private var lastTransaction : TransactionID = ""
 
-	public init?(demo: Bool) {
+	public init	?(demo: Bool) {
 
 		let creds = URLCredentialStorage.shared.defaultCredential(for: .init(host: "api-fx\(demo ? "practice" : "trade").oanda.com",
 			port: 443, protocol: "https",
@@ -68,6 +69,7 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 	private enum RequestError: Error {
 		case noResponse
+		case noData
 	}
 
 	private func basiqueRequest(with url: URL, date format: AcceptDatetimeFormat) -> URLRequest {
@@ -96,25 +98,29 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 	// MARK: - Account Requests
 
-	public func info(completion handler: @escaping(Result<AccountResponse, Error>) ->Void) -> Void {
+	public func info(completion handler: @escaping(Result<Account, Error>) ->Void) -> Void {
 		let request = basiqueRequest(with: oandaURLS.endpoint(url: .id), date: .rfc3339)
 
 		session.dataTask(with: request) { (data, response, error) in
 			do {
-				try? self.verify(error: error, response: response, data: data)
+				try self.verify(error: error, response: response, data: data)
 
 				if let data = data {
-					handler(.success(try jsonDecoder.decode(AccountResponse.self, from: data)))
-				}
-			} catch {
-				handler(.failure(self.handle(error)))
+					let answer = try jsonDecoder.decode(AccountResponse.self, from: data)
+					handler(.success(answer.account))
+					self.lastTransaction = answer.lastTransactionID
+				} else { throw RequestError.noData }
+			} catch (let err) {
+				print(err)
+				handler(.failure(self.handle(err)))
 			}
 
 
 		}.resume()
 	}
 
-	public func createOrder(order: OrderRequest, completion handler: @escaping()->Void) -> Void {
+	public func createOrder(order: OrderRequest, completion
+		handler: @escaping(Result<MarketOrder, Error>)->Void) -> Void {
 
 		var request = basiqueRequest(with: oandaURLS.endpoint(url: .orders), date: dateFormat)
 		request.httpMethod = "POST"
@@ -126,9 +132,19 @@ open class BrokerController: NSObject, URLSessionDelegate, URLSessionTaskDelegat
 
 		let task = session.dataTask(with: request) { (data, response, error) in
 
-			print(String(data: data!, encoding: .utf8))
-			print(error)
-			handler()
+			do {
+				try self.verify(error: error, response: response, data: data)
+
+				if let data = data {
+					let answer = try jsonDecoder.decode(MarketOrderCreation.self, from: data)
+					handler(.success(answer.orderCreateTransaction))
+
+					self.lastTransaction = answer.lastTransactionID
+				} else { throw RequestError.noData }
+
+			} catch {
+				handler(.failure(self.handle(error)))
+			}
 		}
 		task.priority = URLSessionTask.highPriority
 		task.resume()

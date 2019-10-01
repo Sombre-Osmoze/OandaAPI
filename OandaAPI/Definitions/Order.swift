@@ -21,11 +21,11 @@ public struct Order : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	public let type : OrderType
 }
@@ -37,14 +37,14 @@ public protocol OrderBase {
 	var id : OrderID { get }
 
 	/// The time when the Order was created.
-	var createTime : DateTime { get }
+	var createTime : DateTime? { get }
 
 	/// The current state of the Order.
-	var state : OrderState { get }
+	var state : OrderState? { get }
 
 	/// The client extensions of the Order.
 	/// - Important: Do not set, modify, or delete clientExtensions if your account is associated with MT4.
-	var clientExtensions : ClientExtensions { get }
+	var clientExtensions : ClientExtensions? { get }
 
 	/// The type of the Order.
 	var type : OrderType { get }
@@ -55,11 +55,11 @@ public struct MarketOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “MARKET” for Market Orders.
@@ -152,11 +152,11 @@ public struct FixedPriceOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “FIXED_PRICE” for Fixed Price Orders.
@@ -239,11 +239,11 @@ public struct LimitOrder: Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “LIMIT” for Limit Orders.
@@ -345,11 +345,11 @@ public struct StopOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “STOP” for Stop Orders.
@@ -455,11 +455,11 @@ public struct MarketIfTouchedOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “MARKET_IF_TOUCHED” for Market If Touched Orders.
@@ -572,11 +572,11 @@ public struct TakeProfitOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “TAKE_PROFIT” for Take Profit Orders.
@@ -660,11 +660,11 @@ public struct StopLossOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “STOP_LOSS” for Stop Loss Orders.
@@ -755,15 +755,15 @@ public struct StopLossOrder : Codable, OrderBase {
 /// The trailing stop value will follow the market price as it moves in the winning direction,
 /// and the order will filled (closing the Trade) by the first price that is equal to or worse than the trailing stop value.
 /// A TrailingStopLossOrder cannot be used to open a new Position.
-public struct TrailingStopLossOrder : Codable {
+public struct TrailingStopLossOrder : Codable, OrderBase {
 
 	public let id : OrderID
 
-	public let createTime : DateTime
+	public let createTime : DateTime?
 
-	public let state : OrderState
+	public let state : OrderState?
 
-	public let clientExtensions : ClientExtensions
+	public let clientExtensions : ClientExtensions?
 
 	/// The type of the Order.
 	/// Always set to “TRAILING_STOP_LOSS” for Trailing Stop Loss Orders.
@@ -871,7 +871,7 @@ public struct MarketOrderRequest: OrderRequest {
 	/// and a negative number of units results in a short Order.
 	public let units: DecimalNumber
 
-	public let timeInForce: TimeInForce = .fok
+	public var timeInForce: TimeInForce = .fok
 
 	/// The worst price that the client is willing to have the Market Order filled at.
 	public var priceBound : PriceValue? = nil
@@ -894,11 +894,16 @@ public struct MarketOrderRequest: OrderRequest {
 	/// TrailingStopLossDetails specifies the details of a Trailing Stop Loss Order to be created on behalf of a client.
 	/// This may happen when an Order is filled that opens a Trade requiring a Trailing Stop Loss,
 	/// or when a Trade’s dependent Trailing Stop Loss Order is modified directly through the Trade.
-	public let trailingStopLossOnFill : TrailingStopLossDetails? = nil
+	public var trailingStopLossOnFill : TrailingStopLossDetails? = nil
 
 	/// Client Extensions to add to the Trade created when the Order is filled (if such a Trade is created).
 	/// - important: Do not set, modify, or delete tradeClientExtensions if your account is associated with MT4.
 	public var tradeClientExtensions : ClientExtensions? = nil
+
+	public init(_ instrument: InstrumentName, units: DecimalNumber) {
+		self.instrument = instrument
+		self.units = units
+	}
 
 }
 
