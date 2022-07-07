@@ -2,7 +2,7 @@
 //  AccountTests.swift
 //  DefinitionsTests
 //
-//  Created by Marcus Florentin on 05/09/2019.
+//  Created by @Sombre-Osmoze Florentin on 05/09/2019.
 //  Copyright © 2019 Marcus Florentin. All rights reserved.
 //
 

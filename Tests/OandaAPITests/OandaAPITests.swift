@@ -2,7 +2,7 @@
 //  OandaAPITests.swift
 //  OandaAPITests
 //
-//  Created by Marcus Florentin on 28/11/2018.
+//  Created by @Sombre-Osmoze Florentin on 28/11/2018.
 //  Copyright © 2018 Marcus Florentin. All rights reserved.
 //
 
