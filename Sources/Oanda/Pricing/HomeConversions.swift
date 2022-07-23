@@ -25,5 +25,5 @@ public struct HomeConversions: Codable {
 
 				///  The factor used to convert a Position or Trade Value in the specified currency into the Account’s home currency.
 				///  Conversion is performed by multiplying the Position or Trade Value by the conversion factor.
-				public positionValue: DecimalNumber
+				public let positionValue: DecimalNumber
 }
