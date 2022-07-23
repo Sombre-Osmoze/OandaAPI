@@ -8,7 +8,7 @@
 import Foundation
 
 /// A PriceBucket represents a price available for an amount of liquidity.
-public struct PriceBucket<Liquidity: SignedNumeric & Codable>: Codable {
+public struct PriceBucket<Liquidity: IntegerOrDecimal>: Codable {
 
 				/// The Price offered by the PriceBucket.
 				public let price: PriceValue
