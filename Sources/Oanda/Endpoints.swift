@@ -44,11 +44,8 @@ public final class Endpoints {
 								guard var rest, let streaming else { return nil }
 
 								// Setup version
-								if #available(macOS 13.0, *) {
-												rest.append(component: version.rawValue)
-								} else {
-												rest.appendPathComponent(version.rawValue)
-								}
+								rest.appendPathComponent(version.rawValue)
+				
 								
 								restAPI = rest
 								streamingAPI = streaming
