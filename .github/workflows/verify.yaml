@@ -1,0 +1,24 @@
+name: verify
+
+on:
+  pull_request:
+    branches:
+      - stable
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: swift-actions/setup-swift@v1
+
+      - uses: actions/checkout@v2
+        name: Checkout code
+
+      - name: Install dependencies
+        run: swift package resolve
+
+      - name: Build
+        run: swift build
+
+      - name: Test
+        run: swift test
