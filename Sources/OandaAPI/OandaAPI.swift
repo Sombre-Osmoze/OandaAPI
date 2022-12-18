@@ -7,6 +7,9 @@
 
 import Foundation
 import Oanda
+#if os(Linux)
+import FoundationNetworking
+#endif
 
 public class OandaAPI {
 				
@@ -34,7 +37,10 @@ public class OandaAPI {
 				
 				/// Prepare a request with it's headers.
 				private func prepare(_ request: inout URLRequest) {
-								request.allHTTPHeaderFields = ["Authorization": "Bearer \(personalAccessToken)"]
+								request.allHTTPHeaderFields = [
+												"Authorization": "Bearer \(personalAccessToken)",
+												"Accept-Datetime-Format": AcceptDatetimeFormat.rfc3339.rawValue
+								]
 				}
 				
 				// MARK: Response & Body
