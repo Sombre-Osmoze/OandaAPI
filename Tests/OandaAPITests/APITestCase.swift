@@ -33,21 +33,13 @@ let resourcesFolder: URL = {
 				var mainURL = URL(fileURLWithPath: #file)
 				mainURL.deletePathExtension()
 				mainURL.deleteLastPathComponent()
-				if #available(macOS 13.0, *) {
-						return	mainURL.appending(component: "Resources", directoryHint: .isDirectory)
-				} else {
-							return	mainURL.appendingPathComponent("Resources", isDirectory: true)
-				}
+				return	mainURL.appendingPathComponent("Resources", isDirectory: true)
 }()
 
 func file(named: String, extension: String? = "json", in folder: URL = resourcesFolder) throws -> Data {
 				var url = folder
+				url.appendPathComponent(named, isDirectory: false)
 				
-				if #available(macOS 13.0, *) {
-								url.append(path: named, directoryHint: .notDirectory)
-				} else {
-								url.appendPathComponent(named, isDirectory: false)
-				}
 				if let `extension` {
 								url.appendPathExtension(`extension`)
 				}

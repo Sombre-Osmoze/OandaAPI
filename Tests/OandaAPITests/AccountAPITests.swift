@@ -11,14 +11,7 @@ import Mocker
 
 class AccountAPITests: APITestCase {
 								
-				private let accountFolder = {
-								if #available(macOS 13.0, *) {
-												return	resourcesFolder.appending(component: "Account", directoryHint: .isDirectory)
-								} else {
-												return	resourcesFolder.appendingPathComponent("Account", isDirectory: true)
-								}
-								
-				}()
+				private let accountFolder = resourcesFolder.appendingPathComponent("Account", isDirectory: true)
 				
 				// MARK: Accounts
 				
