@@ -60,6 +60,7 @@ public final class Endpoints {
 				public	enum Account {
 								/// Get a list of all Accounts authorized for the provided token.
 								case accounts
+								case account(accountID: AccountID)
 				}
 				
 				/// Account Endpoints
@@ -69,6 +70,8 @@ public final class Endpoints {
 								switch endpoint {
 												case .accounts:
 																components.path += "/accounts"
+												case .account(let accountID):
+																components.path += "/accounts/\(accountID)"
 								}
 								
 							return	components.url(relativeTo: restAPI)
