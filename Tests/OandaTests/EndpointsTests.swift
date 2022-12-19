@@ -46,4 +46,13 @@ class EnpointsTests: XCTestCase {
 								XCTAssertNotNil(url, "failed to create an url for /accounts")
 								XCTAssertEqual(url?.relativePath, "v3/accounts")
 				}
+				
+				func testAccount() {
+								let endpoints = Endpoints(environment: .practice)
+								
+								let url = endpoints?.account(.account(accountID: "test_account"))
+								
+								XCTAssertNotNil(url, "failed to create an url for /accounts")
+								XCTAssertEqual(url?.relativePath, "v3/accounts/test_account")
+				}
 }

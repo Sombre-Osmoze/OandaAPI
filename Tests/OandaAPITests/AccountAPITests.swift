@@ -11,14 +11,7 @@ import Mocker
 
 class AccountAPITests: APITestCase {
 								
-				private let accountFolder = {
-								if #available(macOS 13.0, *) {
-												return	resourcesFolder.appending(component: "Account", directoryHint: .isDirectory)
-								} else {
-												return	resourcesFolder.appendingPathComponent("Account", isDirectory: true)
-								}
-								
-				}()
+				private let accountFolder = resourcesFolder.appendingPathComponent("Account", isDirectory: true)
 				
 				// MARK: Accounts
 				
@@ -37,6 +30,20 @@ class AccountAPITests: APITestCase {
 								XCTAssertEqual(response.accounts.count, 1)
 								XCTAssertEqual(response.accounts[0].id, "test_account")
 								
+				}
+				
+				func testAccount() async throws {
+								let data = try file(named: "account", in: accountFolder)
+								let accountID = "test_account_id"
+								
+								let originalURL = URL(string: "https://api-fxpractice.oanda.com/v3/accounts/\(accountID)")!
+								
+								let mock = Mock.init(url: originalURL, dataType: .json, statusCode: 200, data: [ .get: data ])
+								mock.register()
+								
+								let response = try await client.account(accountID)
+								
+								XCTAssertEqual(response.account.id, accountID)
 				}
 				
 				

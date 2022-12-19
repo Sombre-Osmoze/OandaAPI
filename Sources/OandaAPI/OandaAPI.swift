@@ -2,11 +2,14 @@
 //  OandaAPI.swift
 //  OandaAPI
 //
-//  Created by @Sombre-Osmoze on 18/12/2022.
+//  Created by sombre@osmoze.xyz on 18/12/2022.
 //
 
 import Foundation
 import Oanda
+#if os(Linux)
+import FoundationNetworking
+#endif
 
 public class OandaAPI {
 				
@@ -34,7 +37,10 @@ public class OandaAPI {
 				
 				/// Prepare a request with it's headers.
 				private func prepare(_ request: inout URLRequest) {
-								request.allHTTPHeaderFields = ["Authorization": "Bearer \(personalAccessToken)"]
+								request.allHTTPHeaderFields = [
+												"Authorization": "Bearer \(personalAccessToken)",
+												"Accept-Datetime-Format": AcceptDatetimeFormat.rfc3339.rawValue
+								]
 				}
 				
 				// MARK: Response & Body
@@ -55,6 +61,17 @@ public class OandaAPI {
 				
 				public func accounts() async throws -> AccountsResponse {
 								guard let url = endpoints.account(.accounts) else { throw RequestError.urlEndpoint }
+								var request = URLRequest(url: url)
+								prepare(&request)
+								
+								let (data, response) = try await session.data(for: request)
+								
+								return try verify(response, with: data)
+				}
+				
+				public func account(_ id: AccountID) async throws -> AccountResponse<Account> {
+								guard let url = endpoints.account(.account(accountID: id)) else { throw RequestError.urlEndpoint }
+								
 								var request = URLRequest(url: url)
 								prepare(&request)
 								
