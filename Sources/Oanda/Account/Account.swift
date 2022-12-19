@@ -31,7 +31,7 @@ open class Account : Codable {
 				
 				/// The current guaranteed Stop Loss Order settings of the Account.
 				/// This field will only be present if the guaranteedStopLossOrderMode is not `DISABLED`.
-				public let guaranteedStopLossOrderParameters: GuaranteedStopLossOrderParameters
+				public let guaranteedStopLossOrderParameters: GuaranteedStopLossOrderParameters?
 				
 				/// The current guaranteed Stop Loss Order mode of the Account.
 				public let guaranteedStopLossOrderMode : GuaranteedStopLossOrderMode
@@ -39,10 +39,11 @@ open class Account : Codable {
 				/// The current guaranteed Stop Loss Order settings of the Account.
 				/// This field will only be present if the guaranteedStopLossOrderMode is not `DISABLED`.
 				@available(*, deprecated, message: "Will be removed in a future API update.")
-				public let guaranteedStopLossOrderMutability: GuaranteedStopLossOrderMutability
+				public let guaranteedStopLossOrderMutability: GuaranteedStopLossOrderMutability?
 				
-				/// The date/time that the Account’s resettablePL was last reset.
-				public let resettablePLTime : DateTime
+				// TODO: Custom decoding for reset time
+//				/// The date/time that the Account’s resettablePL was last reset.
+//				public let resettablePLTime : DateTime
 				
 				/// Client-provided margin rate override for the Account.
 				/// The effective margin rate of the Account is the lesser of this value and the OANDA margin rate for the Account’s division.

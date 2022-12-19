@@ -69,6 +69,17 @@ public class OandaAPI {
 								return try verify(response, with: data)
 				}
 				
+				public func account(_ id: AccountID) async throws -> AccountResponse<Account> {
+								guard let url = endpoints.account(.account(accountID: id)) else { throw RequestError.urlEndpoint }
+								
+								var request = URLRequest(url: url)
+								prepare(&request)
+								
+								let (data, response) = try await session.data(for: request)
+								
+								return try verify(response, with: data)
+				}
+				
 				// MARK: - Errors
 				
 				enum RequestError: Error {

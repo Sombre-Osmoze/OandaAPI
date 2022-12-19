@@ -32,5 +32,19 @@ class AccountAPITests: APITestCase {
 								
 				}
 				
+				func testAccount() async throws {
+								let data = try file(named: "account", in: accountFolder)
+								let accountID = "test_account_id"
+								
+								let originalURL = URL(string: "https://api-fxpractice.oanda.com/v3/accounts/\(accountID)")!
+								
+								let mock = Mock.init(url: originalURL, dataType: .json, statusCode: 200, data: [ .get: data ])
+								mock.register()
+								
+								let response = try await client.account(accountID)
+								
+								XCTAssertEqual(response.account.id, accountID)
+				}
+				
 				
 }

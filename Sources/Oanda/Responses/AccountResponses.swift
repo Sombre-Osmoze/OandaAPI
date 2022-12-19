@@ -10,3 +10,8 @@ import Foundation
 public struct AccountsResponse: Decodable {
 				public let accounts: [AccountProperties]
 }
+
+public struct AccountResponse<AccountData: Decodable>: Decodable {
+				public let account: AccountData
+				public let lastTransactionID: TransactionID?
+}
