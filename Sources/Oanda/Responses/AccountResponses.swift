@@ -8,5 +8,5 @@
 import Foundation
 
 public struct AccountsResponse: Decodable {
-				public let accounts: [AuthorizedAccount]
+				public let accounts: [AccountProperties]
 }

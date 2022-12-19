@@ -2,7 +2,7 @@
 //  OandaAPI.swift
 //  OandaAPI
 //
-//  Created by @Sombre-Osmoze on 18/12/2022.
+//  Created by sombre@osmoze.xyz on 18/12/2022.
 //
 
 import Foundation

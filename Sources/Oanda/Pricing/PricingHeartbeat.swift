@@ -2,7 +2,7 @@
 //  PricingHeartbeat.swift
 //  Pricing
 //
-//  Created by @Sombre-Osmoze on 23/07/2022.
+//  Created by sombre@osmoze.xyz on 23/07/2022.
 //
 
 import Foundation

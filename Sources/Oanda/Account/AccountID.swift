@@ -2,7 +2,7 @@
 //  AccountID.swift
 //  Account
 //
-//  Created by @Sombre-Osmoze on 07/07/2022.
+//  Created by sombre@osmoze.xyz on 07/07/2022.
 //
 
 import Foundation
