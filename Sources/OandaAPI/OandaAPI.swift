@@ -75,7 +75,7 @@ public class OandaAPI {
 								var request = URLRequest(url: url)
 								prepare(&request)
 								
-								let (data, response) = try await session.data(for: request)
+								let (data, response) = try await session.dataTask(for: request)
 								
 								return try verify(response, with: data)
 				}
